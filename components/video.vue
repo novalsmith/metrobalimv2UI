@@ -1,11 +1,15 @@
 <template>
     <v-container>
+        <div class="text-h5 mb-4 d-flex align-center">
+                        <v-icon class="mr-2">mdi-video</v-icon> Live Update
+                    </div>
         <v-row>
             <!-- Playlist Video -->
             <v-col md="5" sm="12" lg="5">
                 <v-list>
                     <v-list-item v-for="(video, index) in articles" :key="index" @click="selectVideo(video)"
-                        class="video-list-item">
+                        class="video-list-item" :class="{ 'active-video': currentVideo.title === video.title }">
+
                         <v-row>
                             <v-col cols="4">
                                 <v-img height="80" class="video-thumbnail article-image">
@@ -192,5 +196,13 @@ const toggleLike = (video) => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
+}
+
+.active-video {
+    background: rgba(33, 150, 243, 0.2);
+    /* Warna biru terang */
+    border-left: 4px solid #2196f3;
+    /* Garis tepi untuk menandai video aktif */
+    transition: background 0.3s, border-left 0.3s;
 }
 </style>

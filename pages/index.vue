@@ -1,18 +1,10 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col cols="12">
-                <v-responsive>
-                    <v-skeleton-loader type="image" :loading="loading">
-                        <v-img cover max-height="300">
-                            <NuxtImg class="rounded-lg mb-2" height="300"
-                                src="https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp" />
-                        </v-img>
-                    </v-skeleton-loader>
-                </v-responsive>
-            </v-col>
-        </v-row>
-    </v-container>
+
+    <!-- ads -->
+    <adsComponent />
+    <!-- ads -->
+
+
 
     <!-- Topik Populer -->
     <v-container>
@@ -24,118 +16,28 @@
                     </div>
                 </v-col>
                 <v-col cols="10">
-                    <v-skeleton-loader v-if="loading" type="text" width="100%" height="40" />
-                    <v-chip-group v-else class="text-primary">
+                    <v-chip-group v-if="!loading" class="text-primary">
                         <v-chip v-for="tag in tags" :key="tag" class="rounded" :text="tag"></v-chip>
                     </v-chip-group>
+                    <v-chip-group v-else>
+                        <v-chip class="rounded">Loading...</v-chip>
+                    </v-chip-group>
+
                 </v-col>
             </v-row>
         </v-skeleton-loader>
     </v-container>
 
-    <!-- Artikel Utama -->
-    <v-container>
-        <v-row align="stretch">
-            <v-col md="6" sm="12" lg="6">
-                <v-hover v-slot:default="{ isHovering }">
-                    <v-skeleton-loader :loading="loading" type="image, card-avatar, article">
-                        <v-card class="article-card h-100" :class="{ 'on-hover': isHovering }">
-                            <v-responsive>
-                                <!-- <v-img v-if="articles.length" cover max-height="400">
-                                    <NuxtImg class="rounded-lg mb-2" :src="articles[0].image" />
-                                </v-img> -->
-                                <v-img height="400" cover>
-                                    <NuxtImg preset="headlineMain" v-if="articles[0]?.image"
-                                        :src="articles[0]?.image" />
-                                </v-img>
-                            </v-responsive>
-                            <v-card-title class="text-wrap text-h6">
-                                {{ articles[0]?.title }}
-                            </v-card-title>
-                            <v-card-actions class="d-flex align-center justify-space-between">
-                                <v-btn text small color="primary">Tanah Papua</v-btn>
-                                <span class="text-caption ml-2">1 Jam yang lalu</span>
-                                <v-spacer></v-spacer>
-                                <v-btn text>
-                                    <v-icon v-if="articles[0]?.isLike" color="red">mdi-heart</v-icon>
-                                    <v-icon v-else>mdi-heart-outline</v-icon>
-                                    {{ articles[0]?.like }}
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-skeleton-loader>
-                </v-hover>
-            </v-col>
+    <!-- headlines -->
 
-            <!-- Artikel Sampingan -->
-            <v-col md="6" sm="12" lg="6">
-                <v-row dense align="stretch">
-                    <v-col v-for="index in 3" :key="index" cols="12">
-                        <v-skeleton-loader v-if="loading" type="card-avatar" height="239"></v-skeleton-loader>
-                        <v-hover v-else v-slot:default="{ isHovering }">
-                            <v-card class="article-card h-100" :class="{ 'on-hover': isHovering }">
-                                <v-row no-gutters>
-                                    <v-col cols="12" md="6">
-                                        <v-card-title class="truncated-title text-h6">
-                                            <NuxtLink to="/" class="text-decoration-none text-primary">
-                                                {{ articles[index]?.title }}
-                                            </NuxtLink>
-                                        </v-card-title>
+    <headlinesComponent />
+    <!-- headlines -->
 
-                                    </v-col>
-                                    <v-col cols="12" md="6">
+    <!-- ads -->
+    <adsComponent />
+    <!-- ads -->
 
-                                        <v-img class="article-image" height="120">
-                                            <NuxtImg preset="headlineSub" v-if="articles[index]?.image"
-                                                :src="articles[index]?.image" />
-                                        </v-img>
-
-
-
-                                        <!-- <v-img class="article-image" max-height="120">
-                                            <NuxtImg preset="headlineSub" v-if="articles[index]?.image"
-                                                :src="articles[index]?.image" />
-                                        </v-img> -->
-
-                                    </v-col>
-                                    <v-col cols="12">
-                                        <v-card-actions class="d-flex align-center justify-space-between">
-                                            <v-btn text small color="primary">Tanah Papua</v-btn>
-                                            <span class="text-caption">1 Jam yang lalu</span>
-                                            <v-spacer></v-spacer>
-                                            <v-btn text>
-                                                <v-icon v-if="articles[index]?.isLike" color="red">mdi-heart</v-icon>
-                                                <v-icon v-else>mdi-heart-outline</v-icon>
-                                                {{ articles[index]?.like }}
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-col>
-                                </v-row>
-                            </v-card>
-                        </v-hover>
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
-    </v-container>
-
-    <v-container>
-        <!-- Iklan -->
-        <v-row>
-            <v-col cols="12">
-                <v-responsive>
-                    <v-skeleton-loader type="image" :loading="loading">
-                        <v-img cover max-height="300">
-                            <NuxtImg class="rounded-lg mb-2" height="300"
-                                src="https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp" />
-                        </v-img>
-                    </v-skeleton-loader>
-                </v-responsive>
-            </v-col>
-        </v-row>
-    </v-container>
-
-    <!-- Artikel Terbaru -->
+    <!-- article Terbaru -->
     <v-container>
         <v-row no-gutters>
             <v-col cols="12" md="7">
@@ -154,15 +56,16 @@
                                 <v-card class="article-card" :class="{ 'on-hover': isHovering }">
                                     <v-row no-gutters>
                                         <v-col cols="12" md="5">
-                                            <NuxtLink :to="`/artikel/${item.slug}`">
-                                                <v-img class="article-image" max-height="150">
-                                                    <NuxtImg preset="article" v-if="item.image" :src="item.image" />
+                                            <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                                <v-img class="article-image" max-height="150" :lazy-src="item.image">
+                                                    <NuxtImg preset="article" preload loading="lazy" v-if="item.image"
+                                                        :src="item.image" />
                                                 </v-img>
                                             </NuxtLink>
                                         </v-col>
                                         <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
                                             <v-card-title class="text-h6 text-wrap">
-                                                <NuxtLink :to="`/artikel/${item.slug}`"
+                                                <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
                                                     class="text-decoration-none text-primary">
                                                     {{ item.title }}
                                                 </NuxtLink>
@@ -244,14 +147,10 @@
                     </v-card>
                 </v-container>
 
-                <v-container>
-                    <v-col cols="12">
-                        <v-img>
-                            <NuxtImg to="/" src="https://metrobalim.net/wp-content/uploads/2025/01/poster1.jpg" />
-                        </v-img>
-                    </v-col>
+                <!-- ads -->
+                <adsComponent />
+                <!-- ads -->
 
-                </v-container>
 
 
             </v-col>
@@ -267,6 +166,15 @@
 
 import { ref, onMounted } from "vue";
 import videoComponent from "@/components/video.vue";
+import adsComponent from "@/components/ads.vue";
+import headlinesComponent from "@/components/headlines.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const openArticle = (category, slug) => {
+    router.push(`/article/${category}/${slug}`);
+};
 
 const loading = ref(true);
 const articles = ref([]);
@@ -283,127 +191,168 @@ const tags = ref([
     'Creative Writing',
 ]);
 
-onMounted(() => {
-    setTimeout(() => {
-        loading.value = false;
-        articles.value = [
-            {
-                title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-                subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-12.png",
-                isLike: true,
-                like: 5
-            },
-            {
-                title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-                subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-                image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-                isLike: true,
-                like: 200
-            },
-            {
-                title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-                subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-                isLike: true,
-                like: 200
-            },
 
-            {
-                title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-                subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-                isLike: true,
-                like: 200
-            },
-            {
-                title: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
-                subtitle: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/1.png",
-                isLike: true,
-                like: 50
-            },
-            {
-                title: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
-                subtitle: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250113-WA0039.jpg",
-                isLike: false,
-                like: 0
-            },
-            {
-                title: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua",
-                subtitle: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua.",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/1-1-1024x576.png",
-                isLike: false,
-                like: 0
-            },
-            {
-                title: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
-                subtitle: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250114-WA0051.jpg",
-                isLike: false,
-                like: 0
-            },
+loading.value = false;
+articles.value = [
 
-            {
-                title: "DOA di Getsemani",
-                image: "https://answeredfaith.com/wp-content/uploads/2024/11/examples-of-jesus-praying-in-the-bible-1.jpg",
-                like: 30
-            },
-            {
-                title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-                subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-12.png",
-                isLike: true,
-                like: 5
-            },
-            {
-                title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-                subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-                image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-                isLike: true,
-                like: 200
-            },
-            {
-                title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-                subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-                isLike: true,
-                like: 200
-            },
+    {
+        title: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
+        subtitle: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
+        image: "https://metrobalim.net/wp-content/uploads/2025/02/metrobalim.jpg",
+        isLike: true,
+        like: 5,
+        slug: "veliks-wangai-pemprov",
+        category: "tanah-papua"
+    },
+    {
+        title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
+        subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-12.png",
+        isLike: true,
+        like: 5,
+        slug: "polda-papua",
+        category: "regional"
+    },
+    {
+        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
+        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
+        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        isLike: true,
+        like: 200,
+        slug: "ole-naturalisasi-indonesia",
+        category: "sastra"
+    },
+    {
+        title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
+        subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
+        isLike: true,
+        like: 200,
+        slug: "warga-indonesia",
+        category: "bisnis"
+    },
 
-            {
-                title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-                subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-                isLike: true,
-                like: 200
-            },
-            {
-                title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-                subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-                image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-                isLike: true,
-                like: 200
-            },
-            {
-                title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-                subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-                isLike: true,
-                like: 200
-            },
+    {
+        title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
+        subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "podcast"
+    },
+    {
+        title: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
+        subtitle: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/1.png",
+        isLike: true,
+        like: 50,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
+        subtitle: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250113-WA0039.jpg",
+        isLike: false,
+        like: 0,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua",
+        subtitle: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua.",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/1-1-1024x576.png",
+        isLike: false,
+        like: 0,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
+        subtitle: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250114-WA0051.jpg",
+        isLike: false,
+        like: 0,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
 
-            {
-                title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-                subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-                image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-                isLike: true,
-                like: 200
-            },
-        ];
-    }, 2000); // Simulasi loading
-});
+    {
+        title: "DOA di Getsemani",
+        image: "https://answeredfaith.com/wp-content/uploads/2024/11/examples-of-jesus-praying-in-the-bible-1.jpg",
+        like: 30,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
+        subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-12.png",
+        isLike: true,
+        like: 5,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
+        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
+        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
+        subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+
+    {
+        title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
+        subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
+        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
+        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+    {
+        title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
+        subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+
+    {
+        title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
+        subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
+        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
+        isLike: true,
+        like: 200,
+        slug: "natalius",
+        category: "tanah-papua"
+    },
+];
+
+
 </script>
 
 <style scoped>

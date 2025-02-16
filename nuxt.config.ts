@@ -27,19 +27,23 @@ export default defineNuxtConfig({
     provider: 'ipx', // Gunakan IPX sebagai penyedia gambar
     domains: ['answeredfaith.com', 'metrobalim.net'], // HANYA domain tanpa `https://`
     presets: {
+      logo: {
+        modifiers: {
+          format: 'webp',
+          quality: 80
+        },
+      },
       headlineMain: {
         modifiers: {
           format: 'webp',
-          quality: 80,
-          height:400,
-          fit:"cover"
+          quality: 80
         },
       },
       headlineSub: {
         modifiers: {
           format: 'webp',
-          quality: 80, 
-          height: 120
+          quality: 80,
+          height:120
         },
       },
       
@@ -53,7 +57,7 @@ export default defineNuxtConfig({
       article: {
         modifiers: {
           format: 'webp',
-          quality: 80,
+          quality: 70,
           height: 130
         },
       },

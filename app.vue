@@ -1,22 +1,17 @@
-<!-- <template>
-  <v-layout class="rounded rounded-md">
-    <NuxtLayout>
-      <v-app>
-        <NuxtPage />
-      </v-app>
-    </NuxtLayout>
-
-  </v-layout>
-</template> -->
-
-
 <template>
   <v-app>
     <v-layout>
       <!-- Layout utama Nuxt -->
       <NuxtLayout>
-        <NuxtPage />
+        <KeepAlive>
+          <NuxtPage />
+        </KeepAlive>
       </NuxtLayout>
     </v-layout>
   </v-app>
 </template>
+
+<script setup>
+import { KeepAlive } from 'vue';
+
+</script>

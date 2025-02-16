@@ -1,8 +1,8 @@
 <template>
     <v-container>
         <div class="text-h5 mb-4 d-flex align-center">
-                        <v-icon class="mr-2">mdi-video</v-icon> Live Update
-                    </div>
+            <v-icon class="mr-2">mdi-video</v-icon> Live Update
+        </div>
         <v-row>
             <!-- Playlist Video -->
             <v-col md="5" sm="12" lg="5">
@@ -12,8 +12,8 @@
 
                         <v-row>
                             <v-col cols="4">
-                                <v-img height="80" class="video-thumbnail article-image">
-                                    <NuxtImg v-if="video.image" :src="video.image" />
+                                <v-img height="80" :lazy-src="video.image" class="video-thumbnail article-image">
+                                    <NuxtImg v-if="video.image" loading="lazy" placeholder :src="video.image" />
                                     <div class="overlay-small">
                                         <v-icon class="play-icon" color="white">mdi-play-circle-outline</v-icon>
                                     </div>
@@ -33,8 +33,8 @@
             <v-col md="7" sm="12" lg="7">
                 <v-card>
                     <v-responsive>
-                        <v-img height="400" cover class="article-image video-thumbnail">
-                            <NuxtImg v-if="currentVideo.image" :src="currentVideo.image" />
+                        <v-img height="400" cover :lazy-src="currentVideo.image" class="article-image video-thumbnail">
+                            <NuxtImg v-if="currentVideo.image" loading="lazy" preload :src="currentVideo.image" />
                             <div class="overlay">
                                 <v-icon class="play-icon" color="white" size="80">mdi-play-circle-outline</v-icon>
                             </div>

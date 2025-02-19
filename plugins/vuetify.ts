@@ -5,6 +5,8 @@ import 'vuetify/styles'
 import { createVuetify, type ThemeDefinition } from 'vuetify'
 import { md3 } from 'vuetify/blueprints'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
+// import '~/assets/globals.scss'; // Import SCSS Global
+
 
 export default defineNuxtPlugin((app) => {
 

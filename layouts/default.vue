@@ -8,23 +8,8 @@
                     <v-col cols="3" class="d-flex justify-start align-center">
 
                         <v-responsive>
-                            <NuxtImg preset="logo" :src="imgLogo" placeholder loading="lazy"
-                                class="nuxt-img-responsive" />
+                            <NuxtImg preset="logo" :src="imgLogo" loading="lazy" class="nuxt-img-responsive" />
                         </v-responsive>
-
-                        <!-- <v-responsive>
-                            <nuxt-link to="/">
-                                <v-img class="article-image" :lazy-src="imgLogo">
-                                    <template v-slot:placeholder>
-                                        <v-skeleton-loader type="image" height="400" />
-                                    </template>
-<NuxtImg preset="logo" :src="imgLogo" placeholder loading="lazy" />
-</v-img>
-</nuxt-link>
-
-</v-responsive> -->
-
-
                     </v-col>
 
                     <!-- Search Bar -->
@@ -41,7 +26,7 @@
                                 <v-icon>mdi-mail</v-icon> Subscribe
                             </v-btn>
                             <v-btn icon>
-                                <v-icon>mdi-bookmark-outline</v-icon>
+                                <v-icon icon="mdi-bookmark-outline"></v-icon>
                             </v-btn>
                             <v-btn icon @click="toggleTheme" class="mr-2">
                                 <v-icon :icon="currentThemeIcon"></v-icon>

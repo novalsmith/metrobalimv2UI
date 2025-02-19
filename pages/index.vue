@@ -4,19 +4,17 @@
     <adsComponent />
     <!-- ads -->
 
-
-
     <!-- Topik Populer -->
     <v-container>
         <v-skeleton-loader :loading="loading" type="text">
             <v-row>
                 <v-col cols="2">
                     <div class="text-h6 mb-4">
-                        <v-icon>mdi-pound</v-icon> Topik Populer
+                        <v-icon>mdi-fire</v-icon> Topik Populer
                     </div>
                 </v-col>
                 <v-col cols="10">
-                    <v-chip-group v-if="!loading" class="text-primary">
+                    <v-chip-group v-if="!loading" variant="outlined" selectedClass="text-info">
                         <v-chip v-for="tag in tags" :key="tag" class="rounded" :text="tag"></v-chip>
                     </v-chip-group>
                     <v-chip-group v-else>

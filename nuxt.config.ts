@@ -3,7 +3,9 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-
+  css: [
+    '~/assets/globals.scss' // Import SCSS Global
+  ],
   build: {
     transpile: ['vuetify'],
   },
@@ -30,7 +32,7 @@ export default defineNuxtConfig({
       logo: {
         modifiers: {
           format: 'webp',
-          quality: 80
+          quality: 60
         },
       },
       headlineMain: {

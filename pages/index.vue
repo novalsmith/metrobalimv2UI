@@ -1,7 +1,19 @@
 <template>
 
     <!-- ads -->
-    <adsComponent />
+    <!-- <adsComponent /> -->
+
+    <v-container>
+        <v-row>
+            <v-col cols="12">
+                <Ads src="https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp"
+                    alt="Iklan Metro Bali" width="100%" height="200" format="webp" quality="80" fit="cover"
+                    :modifiers="{ format: 'webp', quality: 80, height: 200 }" maxHeight="300"
+                    @click="handleImageAdClick" />
+            </v-col>
+        </v-row>
+    </v-container>
+
     <!-- ads -->
 
     <!-- Topik Populer -->
@@ -32,7 +44,8 @@
     <!-- headlines -->
 
     <!-- ads -->
-    <adsComponent />
+    <!-- <adsComponent /> -->
+
     <!-- ads -->
 
     <!-- article Terbaru -->
@@ -145,9 +158,15 @@
                     </v-card>
                 </v-container>
 
-                <!-- ads -->
-                <adsComponent />
-                <!-- ads -->
+                <v-container>
+                    <v-row>
+                        <v-col cols="12">
+                            <Ads src="https://metrobalim.net/wp-content/uploads/2025/02/Demokrat-Metrobalim-576x1024.jpg"
+                                alt="Iklan Metro Bali" format="webp" quality="80" fit="cover"
+                                :modifiers="{ format: 'webp', quality: 80 }" @click="handleImageAdClick" />
+                        </v-col>
+                    </v-row>
+                </v-container>
 
 
 
@@ -162,9 +181,9 @@
 <script setup>
 
 
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import videoComponent from "@/components/video.vue";
-import adsComponent from "@/components/ads.vue";
+import Ads from "@/components/ads.vue";
 import headlinesComponent from "@/components/headlines.vue";
 import { useRouter } from "vue-router";
 
@@ -189,7 +208,46 @@ const tags = ref([
     'Creative Writing',
 ]);
 
+const imageAdConfig = {
+    imageProps: {
+        src: "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp",
+        alt: "Iklan Metro Bali",
+        modifiers: { format: 'webp', quality: 80, height: 200 },
+        presets: "ads"
+    },
+    class: 'my-image-ad',
+    style: 'margin-bottom: 20px;',
+};
 
+
+// Konfigurasi Iklan Teks
+const textAdConfig = {
+    src: "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp",
+    alt: "Iklan Metro Bali",
+    modifiers: { format: 'webp', quality: 80 },
+    text: "Promo Spesial!",
+};
+
+// Konfigurasi Iklan dengan Slot
+const slotAdConfig = {
+    src: "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp",
+    alt: "Iklan Metro Bali",
+    modifiers: { format: 'webp', quality: 80 },
+    text: "Promo Spesial!",
+};
+
+// Fungsi Penanganan Klik Iklan
+const handleImageAdClick = () => {
+    console.log("Iklan gambar diklik!");
+};
+
+const handleTextAdClick = () => {
+    console.log("Iklan teks diklik!");
+};
+
+const handleSlotAdClick = () => {
+    console.log("Iklan slot diklik!");
+};
 loading.value = false;
 articles.value = [
 

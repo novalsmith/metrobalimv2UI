@@ -14,6 +14,7 @@ const menuItems = [
     { title: "Modal", path: "/demo/modal" },
     { title: "Icon", path: "/demo/icon" },
     { title: "Text Field", path: "/demo/textfield" },
+    { title: "Image", path: "/demo/image" },
 ];
 
 const navigateTo = (path) => {

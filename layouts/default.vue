@@ -162,10 +162,4 @@ const isActive = (path) => {
     object-fit: contain;
     width: 100%;
 }
-
-.nuxt-img-responsive {
-    width: 100%;
-    max-width: 90%;
-    object-fit: cover;
-}
 </style>

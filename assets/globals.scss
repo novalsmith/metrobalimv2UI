@@ -27,3 +27,10 @@
     display: flex;
     justify-content: space-between;
 }
+
+.nuxt-img-responsive {
+    width: 100%;
+    max-width: 90%;
+    object-fit: cover;
+}
+ 

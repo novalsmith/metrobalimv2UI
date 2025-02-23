@@ -1,6 +1,7 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
+  ssr:false,
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   css: [
@@ -32,7 +33,8 @@ export default defineNuxtConfig({
       logo: {
         modifiers: {
           format: 'webp',
-          quality: 60
+          quality: 80,
+          width:200
         },
       },
       headlineMain: {
@@ -61,6 +63,13 @@ export default defineNuxtConfig({
           format: 'webp',
           quality: 70,
           height: 130
+        },
+      },
+      ads: {
+        modifiers: {
+          format: 'webp',
+          quality: 80,
+          height: 200
         },
       },
     },

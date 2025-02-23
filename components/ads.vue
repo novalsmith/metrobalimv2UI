@@ -1,18 +1,29 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col cols="12">
-                <v-responsive>
-                    <v-img cover max-height="300" :lazy-src="adsData">
-                        <NuxtImg preload loading="lazy" class="rounded-lg mb-2" height="300" :src="adsData" />
-                    </v-img>
-                </v-responsive>
-            </v-col>
-        </v-row>
-    </v-container>
+    <v-responsive :max-width="maxWidth" :max-height="maxHeight" @click="handleClick">
+        <nvimg :src="src" :alt="alt" :width="width" :height="height" :format="format" :quality="quality" :fit="fit"
+            :modifiers="modifiers" />
+    </v-responsive>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-const adsData = "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp";
+import nvimg from '@/components/demo/nvimg.vue';
+
+const props = defineProps({
+    src: { type: String, required: true },
+    alt: { type: String, required: false, default: "Iklan" },
+    width: { type: [String, Number], required: false, default: "100%" },
+    height: { type: [String, Number], required: false, default: "auto" },
+    format: { type: String, required: false, default: "webp" },
+    quality: { type: [String, Number], required: false, default: 80 },
+    fit: { type: String, required: false, default: "cover" },
+    modifiers: { type: Object, required: false, default: () => ({}) },
+    maxWidth: { type: [String, Number], required: false, default: null },
+    maxHeight: { type: [String, Number], required: false, default: 300 },
+});
+
+const emit = defineEmits(["click"]);
+
+const handleClick = () => {
+    emit("click");
+};
 </script>

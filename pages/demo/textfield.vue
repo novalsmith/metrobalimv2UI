@@ -24,8 +24,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import NVTextField from '@/components/demo/nvtextfield.vue';
-import NVDivider from '@/components/demo/nvdivider.vue';
+import NVTextField from '@/components/core/nvtextfield.vue';
+import NVDivider from '@/components/core/nvdivider.vue';
 
 const searchTextWithMinValue = ref('');
 const searchTextWithoutMinValue = ref('');

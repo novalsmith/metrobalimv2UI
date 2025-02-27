@@ -13,7 +13,6 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-// router.push("/demo/button"); // Default ke halaman button
 definePageMeta({
     layout: "demo-default",
 });

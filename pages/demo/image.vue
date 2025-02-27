@@ -1,18 +1,41 @@
 <template>
+
+
     <v-container>
+        <h2>Images</h2>
         <v-row>
-            <v-col cols="6" v-for="image in images" :key="image.src">
-                <v-responsive>
-                    <NVImage v-if="image.src" :src="image.src" :alt="image.alt" :modifiers="image.modifiers"
-                        :placeholder="true" />
-                </v-responsive>
+            <v-col cols="12">
+                <v-card>
+                    <NVImage v-if="images[0].src" :src="images[0].src" :alt="images[0].alt"
+                        :modifiers="images[0].modifiers" :placeholder="true" />
+                </v-card>
+            </v-col>
+
+            <v-col cols="4">
+                <v-card>
+                    <NVImage v-if="images[1].src" :src="images[1].src" :alt="images[1].alt"
+                        :modifiers="images[1].modifiers" :placeholder="true" />
+                </v-card>
+            </v-col>
+            <v-col cols="4">
+                <v-card>
+                    <NVImage v-if="images[2].src" :src="images[2].src" :alt="images[2].alt"
+                        :modifiers="images[2].modifiers" :placeholder="true" />
+
+                </v-card>
+            </v-col>
+            <v-col cols="4">
+                <v-card>
+                    <NVImage v-if="images[2].src" :src="images[2].src" :alt="images[2].alt"
+                        :modifiers="images[2].modifiers" :placeholder="true" />
+                </v-card>
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script setup>
-import NVImage from '@/components/demo/nvimg.vue';
+import NVImage from '@/components/core/nvimg.vue';
 
 const images = [
     {

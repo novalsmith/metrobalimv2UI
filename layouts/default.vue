@@ -7,9 +7,14 @@
                     <!-- Logo -->
                     <v-col cols="3" class="d-flex justify-start align-center">
 
-                        <v-responsive>
+                        <!-- <v-responsive>
                             <NuxtImg preset="logo" :src="imgLogo" loading="lazy" class="nuxt-img-responsive" />
-                        </v-responsive>
+                        </v-responsive> -->
+                        <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{
+                            format: 'webp',
+                            quality: 80,
+                            width: 200
+                        }" @click="handleImageAdClick" />
                     </v-col>
 
                     <!-- Search Bar -->
@@ -82,10 +87,10 @@
 </template>
 
 <script setup>
-import { NuxtImg } from '#components';
-import { ref, computed, onMounted } from 'vue';
+ import { ref, computed, onMounted } from 'vue';
 import { useTheme } from 'vuetify';
 import ArticleDetailDialog from "@/components/articleDetailDialog.vue";
+import Ads from "@/components/ads.vue";
 
 
 const articleDialog = ref(null);

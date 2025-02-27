@@ -29,16 +29,25 @@
                     </v-list-item>
                 </v-list>
             </v-col>
+
             <!-- Pemutar Video Utama -->
             <v-col md="7" sm="12" lg="7">
                 <v-card>
                     <v-responsive>
-                        <v-img height="400" cover :lazy-src="currentVideo.image" class="article-image video-thumbnail">
-                            <NuxtImg v-if="currentVideo.image" loading="lazy" preload :src="currentVideo.image" />
-                            <div class="overlay">
-                                <v-icon class="play-icon" color="white" size="80">mdi-play-circle-outline</v-icon>
-                            </div>
-                        </v-img>
+                        <!-- Jika video sudah dipilih, tampilkan iframe, jika belum tampilkan thumbnail -->
+                        <template v-if="isVideoPlaying">
+                            <iframe :src="currentVideo.videoUrl" frameborder="0" allowfullscreen width="100%"
+                                height="400"></iframe>
+                        </template>
+                        <template v-else>
+                            <v-img height="400" cover :lazy-src="currentVideo.image"
+                                class="article-image video-thumbnail" @click="playVideo">
+                                <NuxtImg v-if="currentVideo.image" loading="lazy" preload :src="currentVideo.image" />
+                                <div class="overlay">
+                                    <v-icon class="play-icon" color="white" size="80">mdi-play-circle-outline</v-icon>
+                                </div>
+                            </v-img>
+                        </template>
                     </v-responsive>
                     <v-card-title class="text-wrap text-h6 truncated-title">
                         {{ currentVideo.title }}
@@ -56,8 +65,6 @@
                     </v-card-actions>
                 </v-card>
             </v-col>
-
-
         </v-row>
     </v-container>
 </template>
@@ -65,48 +72,43 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
+// Data daftar video
 const articles = ref([]);
 const currentVideo = ref({});
+const isVideoPlaying = ref(false); // Menandakan apakah video sedang diputar
+
+// Fungsi untuk konversi URL ke embed YouTube
+const convertToEmbedUrl = (url) => {
+    if (!url.includes("embed")) {
+        const videoId = url.split("v=")[1]?.split("&")[0];
+        return `https://www.youtube.com/embed/${videoId}`;
+    }
+    return url;
+};
 
 // Inisialisasi data
 onMounted(() => {
     articles.value = [
         {
-            title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-            subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-            image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+            title: "Gubernur Papua Pegunungan, Jhon Tabo: Jabatan ASN Harus Sesuai Aturan Negara.",
+            image: "https://img.youtube.com/vi/SrGsyhxzo6s/0.jpg",
+            videoUrl: convertToEmbedUrl("https://www.youtube.com/watch?v=SrGsyhxzo6s"),
+            isLike: true,
+            like: 200
+        },
+        {
+            title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
+            image: "https://img.youtube.com/vi/Gvxl3CkID5Y/0.jpg",
+            videoUrl: convertToEmbedUrl("https://www.youtube.com/watch?v=Gvxl3CkID5Y"),
             isLike: true,
             like: 200
         },
         {
             title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-            image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-            like: 200,
-            isLike: false
-        },
-        {
-            title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik",
-            image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-            like: 150,
-            isLike: false
-        },
-        {
-            title: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga",
-            image: "https://metrobalim.net/wp-content/uploads/2025/01/1.png",
-            like: 50,
-            isLike: false
-        },
-        {
-            title: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
-            image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250113-WA0039.jpg",
-            like: 75,
-            isLike: false
-        },
-        {
-            title: "Refleksi Perjalanan Tahun 2024: Membangun Fondasi Papua",
-            image: "https://metrobalim.net/wp-content/uploads/2025/01/1-1-1024x576.png",
-            like: 30,
-            isLike: false
+            image: "https://img.youtube.com/vi/KpflazB9i1c/0.jpg",
+            videoUrl: convertToEmbedUrl("https://www.youtube.com/watch?v=KpflazB9i1c"),
+            isLike: false,
+            like: 200
         }
     ];
 
@@ -117,6 +119,12 @@ onMounted(() => {
 // Ganti video utama saat diklik di playlist
 const selectVideo = (video) => {
     currentVideo.value = { ...video };
+    isVideoPlaying.value = false; // Reset agar menampilkan thumbnail dulu
+};
+
+// Saat thumbnail diklik, tampilkan iframe
+const playVideo = () => {
+    isVideoPlaying.value = true;
 };
 
 // Toggle like
@@ -177,7 +185,6 @@ const toggleLike = (video) => {
 }
 
 .article-image {
-
     border-radius: 8px;
 }
 
@@ -191,8 +198,6 @@ const toggleLike = (video) => {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     line-clamp: 3;
-    /* Fallback properti */
-    /* Limit to 3 lines */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -200,9 +205,7 @@ const toggleLike = (video) => {
 
 .active-video {
     background: rgba(33, 150, 243, 0.2);
-    /* Warna biru terang */
     border-left: 4px solid #2196f3;
-    /* Garis tepi untuk menandai video aktif */
     transition: background 0.3s, border-left 0.3s;
 }
 </style>

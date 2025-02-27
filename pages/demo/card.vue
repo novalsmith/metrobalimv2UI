@@ -44,15 +44,15 @@
 </template>
 
 <script setup>
-import NVCard from "~/components/demo/nvcard.vue";
-import NVButton from "~/components/demo/nvbutton.vue";
+import NVCard from "~/components/core/nvcard.vue";
+import NVButton from "~/components/core/nvbutton.vue";
 
 const handleActionClick = (action) => {
     console.log("Tombol diklik:", action.text);
 };
 const cardConfig = {
     title: "Custom Styled Card",
-    subtitle:"Here is sample with sub title",
+    subtitle: "Here is sample with sub title",
     content: "This card has external styling.",
     prependIcon: "mdi-star",
     appendIcon: "mdi-check-circle",

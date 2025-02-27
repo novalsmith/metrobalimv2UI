@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import NVIcon from "~/components/demo/nvicon.vue";
+import NVIcon from "~/components/core/nvicon.vue";
 
 const iconsValues = [
     { icon: "mdi-home" },

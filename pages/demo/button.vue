@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import NVButton from "~/components/demo/nvbutton.vue";
+import NVButton from "~/components/core/nvbutton.vue";
 
 // Function for showAlert
 const showAlert = () => {

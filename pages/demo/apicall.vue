@@ -11,10 +11,10 @@
     </v-card>
 </template>
 
-<script setup>
-import CategoryList from '@/components/categoryList.vue'; // Import CategoryList
+<script setup lang="ts">
+import CategoryList from '@/components/categoryList.vue';
 
 definePageMeta({
-    layout: "demo-default",
+    layout: 'demo-default',
 });
 </script>

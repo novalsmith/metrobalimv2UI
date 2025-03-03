@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import NVImage from '@/components/core/nvimg.vue';
+import NVImage from '~/components/core/nvimg.vue';
 
 const images = [
     {

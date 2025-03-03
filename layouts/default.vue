@@ -90,7 +90,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useTheme } from 'vuetify';
 import ArticleDetailDialog from "@/components/core/articleDetailDialog.vue";
-import Ads from "@/components/ads.vue";
+import Ads from "~/components/Ads.vue";
 
 
 const articleDialog = ref(null);

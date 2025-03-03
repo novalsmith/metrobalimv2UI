@@ -197,7 +197,7 @@
 
 import { ref } from "vue";
 import videoComponent from "@/components/video.vue";
-import Ads from "@/components/ads.vue";
+import Ads from "~/components/Ads.vue";
 import headlinesComponent from "@/components/headlines.vue";
 import { useRouter } from "vue-router";
 

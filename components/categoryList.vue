@@ -1,20 +1,28 @@
 <template>
+  <div v-if="error">
+    <p>Terjadi kesalahan: {{ error.message }}</p>
+  </div>
+  <div v-else-if="groupedCategories">
     <v-list>
       <v-list-group v-for="category in groupedCategories" :key="category.categoryId" :value="category.categoryId"
         :prepend-icon="(category.subcategories && category.subcategories.length) ? 'mdi-folder' : 'mdi-file'">
         <template v-slot:activator="{ props }">
           <v-list-item v-bind="props" :title="category.categoryName"></v-list-item>
         </template>
-  
+
         <v-list-item v-for="subcategory in category.subcategories" :key="subcategory.categoryId"
           :title="subcategory.categoryName" :prepend-icon="'mdi-file-document'"></v-list-item>
       </v-list-group>
     </v-list>
-  </template>
-  
-  <script setup>
-  import { useGroupedCategories } from '@/composables/categories';
-  import { defineAsyncComponent } from 'vue'; // Import defineAsyncComponent
-  
-  const { groupedCategories } = await useGroupedCategories();
-  </script>
+  </div>
+  <div v-else>
+    <p v-if="loading">Loading...</p>
+    <p v-else>Tidak ada data kategori.</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useCategoriesDexie } from '~/composables/useCategoriesDexie';
+
+const { groupedCategories, error, loading } = useCategoriesDexie();
+</script>

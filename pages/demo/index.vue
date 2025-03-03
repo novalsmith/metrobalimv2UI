@@ -11,7 +11,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 
-const router = useRouter();
+const router = useRouter(); 
 
 definePageMeta({
     layout: "demo-default",

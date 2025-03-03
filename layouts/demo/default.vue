@@ -1,28 +1,31 @@
 <template>
     <v-app>
         <v-navigation-drawer app>
-            <div align="center">
-                <v-btn icon @click="toggleTheme" variant="text">
-                    <v-icon :icon="currentThemeIcon"></v-icon> {{ themeText }}
-                </v-btn>
-            </div>
-            <v-list activatable>
-                <div class="ml-2">
-                    <h3>Core Component</h3>
+            <v-container>
+                <div align="center">
+                    <v-btn icon @click="toggleTheme" variant="text">
+                        <v-icon :icon="currentThemeIcon"></v-icon> {{ themeText }}
+                    </v-btn>
                 </div>
-                <v-list-item v-for="item in menuItems.coreComponent" :key="item.title" @click="navigateTo(item.path)">
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
+                <v-list activatable>
+                    <div class="ml-2">
+                        <h3>Core Component</h3>
+                    </div>
+                    <v-list-item v-for="item in menuItems.coreComponent" :key="item.title"
+                        @click="navigateTo(item.path)">
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item>
 
-                <nvDivider />
-                <div class="ml-2">
-                    <h3>Custom Component</h3>
-                </div>
-                <v-list-item v-for="item in menuItems.nvCustom" :key="item.title" @click="navigateTo(item.path)">
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
+                    <nvDivider />
+                    <div class="ml-2">
+                        <h3>Custom Component</h3>
+                    </div>
+                    <v-list-item v-for="item in menuItems.nvCustom" :key="item.title" @click="navigateTo(item.path)">
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item>
 
-            </v-list>
+                </v-list>
+            </v-container>
 
 
         </v-navigation-drawer>
@@ -58,6 +61,7 @@ const menuItems = {
     ],
     nvCustom: [
         { title: "Ads", path: "/demo/ads" },
+        { title: "API Call", path: "/demo/apicall" },
     ]
 };
 

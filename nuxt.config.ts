@@ -11,9 +11,8 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
 
-  modules: [
-    '@nuxt/image-edge', // Hapus function dalam array modules
-  ],
+  modules: [// Hapus function dalam array modules
+  '@nuxt/image-edge', '@nuxt/scripts'],
 
   vite: {
     plugins: [
@@ -72,6 +71,11 @@ export default defineNuxtConfig({
           height: 200
         },
       },
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.BASE_URL,
     },
   },
 })

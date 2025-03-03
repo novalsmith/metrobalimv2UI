@@ -67,12 +67,20 @@
                                 <v-card class="article-card" :class="{ 'on-hover': isHovering }">
                                     <v-row no-gutters>
                                         <v-col cols="12" md="5">
-                                            <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
-                                                <v-img class="article-image" max-height="150" :lazy-src="item.image">
-                                                    <NuxtImg preset="article" preload loading="lazy" v-if="item.image"
-                                                        :src="item.image" />
-                                                </v-img>
-                                            </NuxtLink>
+                                            <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
+                                                <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                                    <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
+                                                        class="w-100 h-100" placeholder="blur" loading="lazy"
+                                                        format="webp" fit="cover" style="object-fit: cover;" />
+                                                </NuxtLink>
+
+                                            </v-responsive>
+                                            <!-- <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                                 <v-img class="article-image" max-height="150" :lazy-src="item.image">  
+                                            <NuxtImg preset="article" placeholder="blur" loading="lazy"
+                                                v-if="item.image" :src="item.image" />
+                                       
+                                            </NuxtLink>   -->
                                         </v-col>
                                         <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
                                             <v-card-title class="text-h6 text-wrap">
@@ -256,7 +264,15 @@ const handleSlotAdClick = () => {
 };
 loading.value = false;
 articles.value = [
-
+    {
+        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
+        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
+        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        isLike: true,
+        like: 200,
+        slug: "ole-naturalisasi-indonesia",
+        category: "sastra"
+    },
     {
         title: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
         subtitle: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
@@ -275,15 +291,7 @@ articles.value = [
         slug: "polda-papua",
         category: "regional"
     },
-    {
-        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-        isLike: true,
-        like: 200,
-        slug: "ole-naturalisasi-indonesia",
-        category: "sastra"
-    },
+
     {
         title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
         subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",

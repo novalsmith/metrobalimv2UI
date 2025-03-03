@@ -8,7 +8,7 @@
                     <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
                         <NuxtLink @click.prevent="openArticle(articles[0])">
                             <NuxtImg preset="headlineMain" :src="articles[0]?.image || 'default-image.jpg'"
-                                class="w-100 h-100" placeholder loading="lazy" format="webp" fit="cover"
+                                class="w-100 h-100" placeholder="blur" loading="lazy" format="webp" fit="cover"
                                 style="object-fit: cover; min-height: 100%;" />
                         </NuxtLink>
 
@@ -71,8 +71,8 @@
                                     <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
                                         <NuxtLink @click.prevent="openArticle(articles[index])">
                                             <NuxtImg preset="headlineMain" :src="article?.image || 'default-image.jpg'"
-                                                class="w-100 h-100" placeholder loading="lazy" format="webp" fit="cover"
-                                                style="object-fit: cover;" />
+                                                class="w-100 h-100" placeholder="blur" loading="lazy" format="webp"
+                                                fit="cover" style="object-fit: cover;" />
                                         </NuxtLink>
 
                                     </v-responsive>
@@ -119,6 +119,15 @@ const fetchArticles = async () => {
         // Simulasi API call dengan setTimeout
         setTimeout(() => {
             articles.value = [
+                {
+                    title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
+                    subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
+                    image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+                    isLike: true,
+                    like: 200,
+                    slug: "ole-naturalisasi-indonesia",
+                    category: "sastra"
+                },
 
                 {
                     title: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
@@ -138,15 +147,7 @@ const fetchArticles = async () => {
                     slug: "polda-papua",
                     category: "regional"
                 },
-                {
-                    title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-                    subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-                    image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-                    isLike: true,
-                    like: 200,
-                    slug: "ole-naturalisasi-indonesia",
-                    category: "sastra"
-                },
+
                 {
                     title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
                     subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",

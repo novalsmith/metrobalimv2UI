@@ -87,9 +87,9 @@
 </template>
 
 <script setup>
- import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useTheme } from 'vuetify';
-import ArticleDetailDialog from "@/components/articleDetailDialog.vue";
+import ArticleDetailDialog from "@/components/core/articleDetailDialog.vue";
 import Ads from "@/components/ads.vue";
 
 

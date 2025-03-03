@@ -33,22 +33,7 @@
             <!-- Pemutar Video Utama -->
             <v-col md="7" sm="12" lg="7">
                 <v-card>
-                    <v-responsive>
-                        <!-- Jika video sudah dipilih, tampilkan iframe, jika belum tampilkan thumbnail -->
-                        <template v-if="isVideoPlaying">
-                            <iframe :src="currentVideo.videoUrl" frameborder="0" allowfullscreen width="100%"
-                                height="400"></iframe>
-                        </template>
-                        <template v-else>
-                            <v-img height="400" cover :lazy-src="currentVideo.image"
-                                class="article-image video-thumbnail" @click="playVideo">
-                                <NuxtImg v-if="currentVideo.image" loading="lazy" preload :src="currentVideo.image" />
-                                <div class="overlay">
-                                    <v-icon class="play-icon" color="white" size="80">mdi-play-circle-outline</v-icon>
-                                </div>
-                            </v-img>
-                        </template>
-                    </v-responsive>
+                    <NVVideo :videoSrc="currentVideo.videoUrl" />
                     <v-card-title class="text-wrap text-h6 truncated-title">
                         {{ currentVideo.title }}
                     </v-card-title>
@@ -71,41 +56,35 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import NVVideo from '@/components/core/nvvideo.vue'
 
 // Data daftar video
 const articles = ref([]);
 const currentVideo = ref({});
 const isVideoPlaying = ref(false); // Menandakan apakah video sedang diputar
 
-// Fungsi untuk konversi URL ke embed YouTube
-const convertToEmbedUrl = (url) => {
-    if (!url.includes("embed")) {
-        const videoId = url.split("v=")[1]?.split("&")[0];
-        return `https://www.youtube.com/embed/${videoId}`;
-    }
-    return url;
-};
+
 
 // Inisialisasi data
 onMounted(() => {
     articles.value = [
         {
             title: "Gubernur Papua Pegunungan, Jhon Tabo: Jabatan ASN Harus Sesuai Aturan Negara.",
-            image: "https://img.youtube.com/vi/SrGsyhxzo6s/0.jpg",
+            image: getThumbnail("https://www.youtube.com/watch?v=SrGsyhxzo6s"),
             videoUrl: convertToEmbedUrl("https://www.youtube.com/watch?v=SrGsyhxzo6s"),
             isLike: true,
             like: 200
         },
         {
             title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-            image: "https://img.youtube.com/vi/Gvxl3CkID5Y/0.jpg",
+            image: getThumbnail("https://www.youtube.com/watch?v=Gvxl3CkID5Y"),
             videoUrl: convertToEmbedUrl("https://www.youtube.com/watch?v=Gvxl3CkID5Y"),
             isLike: true,
             like: 200
         },
         {
             title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-            image: "https://img.youtube.com/vi/KpflazB9i1c/0.jpg",
+            image: getThumbnail("https://www.youtube.com/watch?v=KpflazB9i1c"),
             videoUrl: convertToEmbedUrl("https://www.youtube.com/watch?v=KpflazB9i1c"),
             isLike: false,
             like: 200
@@ -116,16 +95,41 @@ onMounted(() => {
     currentVideo.value = { ...articles.value[0] };
 });
 
-// Ganti video utama saat diklik di playlist
-const selectVideo = (video) => {
-    currentVideo.value = { ...video };
-    isVideoPlaying.value = false; // Reset agar menampilkan thumbnail dulu
+
+// Fungsi untuk konversi URL ke embed YouTube dengan autoplay
+const convertToEmbedUrl = (url) => {
+    if (!url.includes("embed")) {
+        const videoId = url.split("v=")[1]?.split("&")[0];
+        return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    }
+    return `${url}?autoplay=1`;
 };
 
-// Saat thumbnail diklik, tampilkan iframe
+const getThumbnail = (url) => {
+    if (!url.includes("embed")) {
+        const videoId = url.split("v=")[1]?.split("&")[0];
+        return `https://img.youtube.com/vi/${videoId}/0.jpg`;
+    }
+    return `${url}?autoplay=1`;
+};
+
+// Ganti video utama saat diklik di playlist
+const selectVideo = (video) => {
+    currentVideo.value = {
+        ...video,
+        videoUrl: convertToEmbedUrl(video.videoUrl) // Tambahkan autoplay
+    };
+    isVideoPlaying.value = true; // Langsung ganti ke iframe dan putar video
+};
+
+// Saat thumbnail diklik, langsung putar video
 const playVideo = () => {
     isVideoPlaying.value = true;
+    currentVideo.value.videoUrl = convertToEmbedUrl(currentVideo.value.videoUrl); // Pastikan autoplay aktif
 };
+
+
+
 
 // Toggle like
 const toggleLike = (video) => {

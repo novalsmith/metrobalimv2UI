@@ -1,13 +1,14 @@
 // repositories/CategoryRepository.ts
 import { $fetch } from 'ofetch';
 import { CategoryService } from '@/services/dexie/CategoryService';
-import { type Category } from '@/interfaces/ICategory';
-import { CategoryModel } from '@/models/CategoryModel'; // Import model
+import { CategoryModel } from '@/models/CategoryModel';
+import { type ICategoryEntity } from '@/interfaces/ICategoryEntity';
+import { type ICategoryRepository } from '@/interfaces/ICategoryRepository';
 
-export const CategoryRepository = {
+export const CategoryRepository: ICategoryRepository = {
   async getCategoriesFromApi(): Promise<CategoryModel[] | null> {
     try {
-      const response = await $fetch<Category[]>('/api/categories');
+      const response = await $fetch<ICategoryEntity[]>('/api/categories');
       if (!response) return null;
       return response.map((category) => new CategoryModel(category));
     } catch (err: any) {
@@ -21,7 +22,7 @@ export const CategoryRepository = {
     return categories.map((category) => new CategoryModel(category));
   },
 
-  async saveCategoriesToDexie(categories: Category[]): Promise<void> {
-    await CategoryService.addCategories(categories);
+  async saveCategoriesToDexie(categories: CategoryModel[]): Promise<void> {
+    await CategoryService.addCategories(categories.map((model) => model as ICategoryEntity));
   },
 };

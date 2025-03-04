@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   },
 
   modules: [// Hapus function dalam array modules
-  '@nuxt/image-edge', '@nuxt/scripts'],
+  '@nuxt/image-edge', '@nuxt/scripts', '@pinia/nuxt'],
 
   vite: {
     plugins: [

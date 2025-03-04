@@ -1,7 +1,6 @@
-// composables/useCategoriesDexie.ts
+// composables/Categories.ts
 import { ref, onMounted } from 'vue';
 import { CategoryRepository } from '@/repositories/CategoryRepository';
-import { type Category } from '@/interfaces/ICategory';
 import { CategoryModel } from '@/models/CategoryModel';
 
 export const useCategoriesDexie = () => {
@@ -41,7 +40,7 @@ export const useCategoriesDexie = () => {
         console.log('Categories loaded from API.');
         const apiCategories = await CategoryRepository.getCategoriesFromApi();
         if (apiCategories) {
-          await CategoryRepository.saveCategoriesToDexie(apiCategories.map((model) => model as Category));
+          await CategoryRepository.saveCategoriesToDexie(apiCategories.map((model) => model as CategoryModel));
           categories.value = apiCategories;
         }
       }

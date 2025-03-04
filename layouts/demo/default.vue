@@ -61,7 +61,7 @@ const menuItems = {
     ],
     nvCustom: [
         { title: "Ads", path: "/demo/ads" },
-        { title: "API Call", path: "/demo/apicall" },
+        { title: "API Call & Pinia", path: "/demo/apicall" },
     ]
 };
 

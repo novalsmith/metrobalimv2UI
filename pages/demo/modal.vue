@@ -54,7 +54,7 @@
 
 <script setup>
 import { ref } from "vue";
-import NVModal from "~/componentscore/nvmodal.vue";
+import NVModal from "~/components/core/nvmodal.vue";
 
 const openModal = ref(false);
 const openBottomSheet = ref(false);

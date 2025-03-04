@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCategoriesDexie } from '~/composables/useCategoriesDexie';
+import { useCategoriesDexie } from '@/composables/Categories';
 
 const { groupedCategories, error, loading } = useCategoriesDexie();
 </script>

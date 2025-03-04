@@ -1,9 +1,10 @@
 // services/dexie/CategoryService.ts
 import Dexie, { type Table } from 'dexie';
-import { type Category } from '@/interfaces/ICategory'; // Import interface
+import { type ICategoryEntity } from '@/interfaces/ICategoryEntity';
+import { type ICategoryService } from '@/interfaces/ICategoryService';
 
 interface MyDatabase extends Dexie {
-  categories: Table<Category>;
+  categories: Table<ICategoryEntity>;
 }
 
 const db = new Dexie('CategoryDatabase') as MyDatabase;
@@ -11,8 +12,8 @@ db.version(1).stores({
   categories: 'categoryId, parentId, categoryName',
 });
 
-export const CategoryService = {
-  async getAllCategories(): Promise<Category[]> {
+export const CategoryService: ICategoryService = {
+  async getAllCategories(): Promise<ICategoryEntity[]> {
     try {
       return await db.categories.toArray();
     } catch (error) {
@@ -21,7 +22,7 @@ export const CategoryService = {
     }
   },
 
-  async addCategories(categories: Category[]): Promise<void> {
+  async addCategories(categories: ICategoryEntity[]): Promise<void> {
     try {
       await db.categories.bulkPut(categories);
     } catch (error) {

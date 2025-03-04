@@ -5,7 +5,7 @@
 
         <v-row dense>
             <v-col cols="12" sm="6" md="4" v-for="(btn, index) in buttons" :key="index">
-                <NVButton :config="btn" />
+                <NVButton :text="btn.text" :variant="btn.variant" :color="btn.color" />
             </v-col>
         </v-row>
 
@@ -14,38 +14,35 @@
 
         <v-row dense>
             <v-col cols="12" sm="6" md="4" v-for="(btn, index) in advancedButtons" :key="'adv-' + index">
-                <NVButton :config="btn">
-                    <!-- Prepend Slot -->
+                <NVButton :text="btn.text" :variant="btn.variant" :color="btn.color" :prependIcon="btn.prependIcon"
+                    :appendIcon="btn.appendIcon" :icon="btn.icon" :block="btn.block" :loading="btn.loading"
+                    :disabled="btn.disabled" @click="btn.onClick ? btn.onClick() : () => { }">
                     <template v-if="btn.prependIcon" #prepend>
                         <v-icon>{{ btn.prependIcon }}</v-icon>
                     </template>
 
-                    <!-- Append Slot -->
                     <template v-if="btn.appendIcon" #append>
                         <v-icon>{{ btn.appendIcon }}</v-icon>
                     </template>
                 </NVButton>
             </v-col>
         </v-row>
-
     </v-container>
 </template>
 
 <script setup>
 import NVButton from "~/components/core/nvbutton.vue";
 
-// Function for showAlert
 const showAlert = () => {
     alert("Awesome!");
 };
 
-// Define buttons without using 'new' or constructors
 const buttons = [
     { text: "Info", variant: "flat", color: "info" },
     { text: "Primary", variant: "flat", color: "primary" },
     { text: "Success", variant: "flat", color: "success" },
     { text: "Warning", variant: "flat", color: "warning" },
-    { text: "Error", variant: "flat", color: "error" }
+    { text: "Error", variant: "flat", color: "error" },
 ];
 
 const advancedButtons = [
@@ -56,7 +53,7 @@ const advancedButtons = [
     { text: "Icon Only", variant: "text", color: "primary", icon: true, prependIcon: "mdi-heart" },
     { text: "Block Button", variant: "elevated", color: "secondary", block: true },
     { text: "Loading", variant: "elevated", color: "warning", loading: true },
-    { text: "Disabled", variant: "outlined", color: "grey", disabled: true }
+    { text: "Disabled", variant: "outlined", color: "grey", disabled: true },
 ];
 
 definePageMeta({

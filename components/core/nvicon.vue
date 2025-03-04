@@ -1,17 +1,16 @@
 <template>
-    <v-icon v-bind="config" :aria-hidden="config.ariaHidden || false" />
+    <v-icon :icon="icon" :aria-hidden="ariaHidden" />
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-
-const props = defineProps({
-    config: {
-        type: Object,
-        default: () => ({
-            icon: 'mdi-check',
-        })
+defineProps({
+    icon: {
+        type: String,
+        default: "mdi-check",
+    },
+    ariaHidden: {
+        type: Boolean,
+        default: false,
     },
 });
-
 </script>

@@ -1,34 +1,60 @@
 <template>
-    <v-btn v-bind="config" @click="handleClick">
-        <slot name="prepend" v-if="$slots.prepend">
-        </slot>
+    <v-btn :color="color" :variant="variant" :size="size" :icon="icon" :block="block" :disabled="disabled"
+        :loading="loading" :elevation="elevation" @click="handleClick">
+        <slot name="prepend" v-if="$slots.prepend"></slot>
 
-        <slot>{{ config.text }}</slot>
+        <slot>{{ text }}</slot>
 
-        <slot name="append" v-if="$slots.append">
-
-        </slot>
+        <slot name="append" v-if="$slots.append"></slot>
     </v-btn>
 </template>
 
 <script setup>
 defineProps({
-    config: {
-        type: Object,
-        default: () => ({
-            text: "Button",
-            color: "primary",
-            variant: "text",
-            size: "default",
-            icon: false,
-            block: false,
-            disabled: false,
-            loading: false,
-            elevation: 0,
-            prependIcon: null,
-            appendIcon: null
-        }),
-    }
+    text: {
+        type: String,
+        default: "Button",
+    },
+    color: {
+        type: String,
+        default: "primary",
+    },
+    variant: {
+        type: String,
+        default: "text",
+    },
+    size: {
+        type: String,
+        default: "default",
+    },
+    icon: {
+        type: Boolean,
+        default: false,
+    },
+    block: {
+        type: Boolean,
+        default: false,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    loading: {
+        type: Boolean,
+        default: false,
+    },
+    elevation: {
+        type: Number,
+        default: 0,
+    },
+    prependIcon: {
+        type: String,
+        default: null,
+    },
+    appendIcon: {
+        type: String,
+        default: null,
+    },
 });
 
 const emit = defineEmits(["click"]);

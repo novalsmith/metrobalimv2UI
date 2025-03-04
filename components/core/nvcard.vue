@@ -1,37 +1,36 @@
 <template>
-    <v-card v-bind="config" class="pa-4 mb-3">
-
-        <!-- Title -->
-        <v-card-title v-if="config.title || $slots.title">
+    <v-card :elevation="elevation" class="pa-4 mb-3">
+        <v-card-title v-if="title || $slots.title">
             <slot name="title">
-                {{ config.title }}
+                {{ title }}
             </slot>
         </v-card-title>
 
-        <!-- Content -->
-        <v-card-text v-if="config.content || $slots.default">
+        <v-card-text v-if="content || $slots.default">
             <slot>
-                {{ config.content }}
+                {{ content }}
             </slot>
         </v-card-text>
 
-        <!-- Actions -->
         <v-card-actions v-if="$slots.actions">
             <slot name="actions"></slot>
         </v-card-actions>
-
     </v-card>
 </template>
 
 <script setup>
 defineProps({
-    config: {
-        type: Object,
-        default: () => ({
-            title: "Default Title",
-            content: "",
-            elevation: 2,
-        }),
-    }
+    title: {
+        type: String,
+        default: "Default Title",
+    },
+    content: {
+        type: String,
+        default: "",
+    },
+    elevation: {
+        type: Number,
+        default: 2,
+    },
 });
 </script>

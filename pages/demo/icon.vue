@@ -5,12 +5,12 @@
 
         <div class="d-flex justify-space-around">
             <v-row>
-                <v-col cols="1" v-for="(btn, index) in iconsValues" :key="'adv-' + index">
-                    <NVIcon :config="btn" />
+                <v-col cols="1" v-for="(iconData, index) in iconsValues" :key="'adv-' + index">
+                    <NVIcon :icon="iconData.icon" :aria-hidden="iconData.ariaHidden" :color="iconData.color"
+                        :size="iconData.size" />
                 </v-col>
             </v-row>
         </div>
-
     </v-container>
 </template>
 
@@ -36,7 +36,7 @@ const iconsValues = [
     { icon: "mdi-cart" },
     { icon: "mdi-check" },
     { icon: "mdi-chevron-down" },
-    { icon: "mdi-clock", color: "success", size: 48, ariaHidden: "false" },
+    { icon: "mdi-clock", color: "success", size: 48, ariaHidden: false },
     { icon: "mdi-cloud" },
     { icon: "mdi-cog" },
     { icon: "mdi-content-copy" },
@@ -51,7 +51,6 @@ const iconsValues = [
     { icon: "mdi-heart" },
     { icon: "mdi-information-outline" },
 ];
-
 
 definePageMeta({
     layout: "demo-default",

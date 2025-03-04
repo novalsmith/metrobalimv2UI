@@ -7,9 +7,7 @@
                     <!-- Logo -->
                     <v-col cols="3" class="d-flex justify-start align-center">
 
-                        <!-- <v-responsive>
-                            <NuxtImg preset="logo" :src="imgLogo" loading="lazy" class="nuxt-img-responsive" />
-                        </v-responsive> -->
+
                         <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{
                             format: 'webp',
                             quality: 80,

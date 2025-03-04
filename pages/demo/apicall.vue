@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import CategoryList from '@/components/categoryList.vue';
-import CategoryListPinia from '@/components/categorieslist';
-import CategoryDetailPinia from '~/components/categoriesdetail';
+import CategoryListPinia from '@/components/categorieslist.vue';
+import CategoryDetailPinia from '~/components/categoriesdetail.vue';
 
 import { useCategoryStore } from '~/stores/categories';
 const categoryStore = useCategoryStore();

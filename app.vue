@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <!-- <v-app> -->
     <v-layout>
       <!-- Layout utama Nuxt -->
       <NuxtLayout>
@@ -8,7 +8,7 @@
         </KeepAlive>
       </NuxtLayout>
     </v-layout>
-  </v-app>
+  <!-- </v-app> -->
 </template>
 
 <script setup>

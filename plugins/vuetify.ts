@@ -75,7 +75,7 @@ export default defineNuxtPlugin((app) => {
     defaults: {
       VAppBar: {},
       global: {
-        ripple: false,
+        ripple: true,
       },
     },
     icons: {

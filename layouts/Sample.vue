@@ -1,43 +1,46 @@
 <template>
     <v-app>
-        <v-toolbar style="background-color: transparent;" elevation="1">
-            <template v-slot:prepend>
-                <v-app-bar-nav-icon @click="toggleMenu"></v-app-bar-nav-icon>
-                <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80, width: 200 }"
-                    @click="handleImageAdClick" class="mr-5" />
-            </template>
-            <v-spacer></v-spacer>
-            <v-toolbar-items>
-                <v-btn v-for="(menu, i) in menus" :key="i" :to="menu.categoryId" slim variant="text" rounded="false"
-                    class="custom-active-button"
-                    @click="menu.subMenu ? showSubMenuToolbar(menu) : hideSubMenuToolbar()">
-                    <v-icon class="mr-1" size="27" color="grey-lighten-1">{{ menu.icon }}</v-icon>
-                    {{ menu.title }}
-                </v-btn>
-            </v-toolbar-items>
-            <v-spacer></v-spacer>
-            <v-divider class="mx-2" vertical></v-divider>
-            <v-btn icon small @click="handleSearch"><v-icon>mdi-magnify</v-icon></v-btn>
-            <v-btn icon small class="mr-2" @click="toggleTheme"><v-icon :icon="currentThemeIcon"></v-icon></v-btn>
-            <v-btn icon small @click="handleProfile"><v-icon>mdi-account-circle-outline</v-icon></v-btn>
-            <v-btn icon="mdi-dots-vertical"></v-btn>
-        </v-toolbar>
-
-        <v-toolbar v-if="subMenuToolbarVisible" elevation="1">
+        <v-app-bar fixed app>
             <v-container fluid>
-                <v-row justify="center">
-                    <v-col cols="auto">
-                        <v-toolbar-items>
-                            <v-btn v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
-                                slim variant="text" rounded="false" @click="navigate(subMenu)">
-                                <v-icon class="mr-1" size="27" color="grey-lighten-1">{{ subMenu.icon }}</v-icon>
-                                {{ subMenu.title }}
-                            </v-btn>
-                        </v-toolbar-items>
+                <v-row align="center" no-gutters>
+                    <v-col cols="auto" class="d-flex align-center">
+                        <v-btn small icon @click="toggleMenu" class="mr-2">
+                            <v-icon>{{ menuIcon }}</v-icon>
+                        </v-btn>
+                        <Ads :src="imgLogo" alt="Iklan Metro Bali"
+                            :modifiers="{ format: 'webp', quality: 80, width: 200 }" @click="handleImageAdClick"
+                            class="mr-4" />
+
+                        <v-menu v-for="(menu, i) in menus" :key="i" offset-y open-on-hover
+                            transition="slide-x-transition">
+                            <template v-slot:activator="{ props }">
+                                <v-btn :prepend-icon="menu.icon" v-bind="props" class="text-capitalize"
+                                    style="font-size: medium;">
+                                    {{ menu.title }}
+                                    <v-icon v-if="menu.subMenu" class="menu-icon">{{ submenuIcon }}</v-icon>
+                                </v-btn>
+                            </template>
+                            <v-list v-if="menu.subMenu">
+                                <v-list-item v-for="(subMenu, j) in menu.subMenu" :key="j" @click="navigate(subMenu)">
+                                    <v-list-item-title>{{ subMenu.title }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                            <v-list v-else>
+                                <v-list-item @click="navigate(menu)">
+                                    <v-list-item-title>{{ menu.title }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                    </v-col>
+                    <v-col class="d-flex align-center justify-end">
+                        <v-btn icon small @click="handleSearch"><v-icon>mdi-magnify</v-icon></v-btn>
+                        <v-btn icon small class="mr-2" @click="toggleTheme"><v-icon
+                                :icon="currentThemeIcon"></v-icon></v-btn>
+                        <v-btn icon small @click="handleProfile"><v-icon>mdi-account-circle-outline</v-icon></v-btn>
                     </v-col>
                 </v-row>
             </v-container>
-        </v-toolbar>
+        </v-app-bar>
 
         <v-main>
             <keep-alive>
@@ -74,8 +77,6 @@ const isLoading = ref(true);
 const sideMenu = ref(false);
 const imgLogo = "/images/metrobalimlogo.webp";
 const activeSubMenu = ref(null);
-const subMenuToolbarVisible = ref(false);
-const selectedSubMenu = ref({});
 
 const toggleTheme = () => {
     theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
@@ -83,11 +84,12 @@ const toggleTheme = () => {
 
 const menuIcon = computed(() => (sideMenu.value ? 'mdi-close' : 'mdi-menu'));
 const currentThemeIcon = computed(() => theme.global.current.value.dark ? 'mdi-weather-night' : 'mdi-brightness-7');
+const submenuIcon = computed(() => 'mdi-chevron-down');
 
 const menus = ref([
     { title: "Home", icon: "mdi-home", categoryId: "/" },
     {
-        title: "Tanah Papua", icon: "mdi-heart", categoryId: "/article/tanah-papua",
+        title: "Tanah Papua", icon: "mdi-map-marker", categoryId: "/article/tanah-papua",
         subMenu: [
             { title: "Papua", icon: "mdi-earth", categoryId: "/article/regional" },
             { title: "Papua Tengah", icon: "mdi-earth", categoryId: "/article/regional" },
@@ -109,8 +111,8 @@ const menus = ref([
             { title: "HIV-AIDS", icon: "mdi-ribbon", categoryId: "/article/hiv-aids" },
         ]
     },
-    { title: "Kesehatan", icon: "mdi-doctor", categoryId: "/article/video" },
-    { title: "Pendidikan", icon: "mdi-book-open", categoryId: "/article/video" }
+    { title: "Kesehatan", icon: "mdi-video", categoryId: "/article/video" },
+    { title: "Pendidikan", icon: "mdi-video", categoryId: "/article/video" }
 ]);
 
 onMounted(() => {
@@ -124,35 +126,30 @@ const toggleMenu = () => {
 const navigate = (menu) => {
     console.log(`Navigating to ${menu.categoryId}`);
     sideMenu.value = false;
-    subMenuToolbarVisible.value = false;
 };
 
 const handleSearch = () => {
     console.log("Search clicked");
 };
-
-const showSubMenuToolbar = (menu) => {
-    if (menu.subMenu) {
-        subMenuToolbarVisible.value = true;
-        selectedSubMenu.value = menu;
-    }
-};
-
-const hideSubMenuToolbar = () => {
-    subMenuToolbarVisible.value = false;
-    selectedSubMenu.value = {};
-};
 </script>
 
 <style scoped>
-.sub-menu-toolbar {
-    background-color: #f0f0f0;
+.v-navigation-drawer {
+    width: 250px;
 }
 
-.custom-active-button.v-btn--active {
-    /* background-color: #bfdcff; */
-    /* Warna latar belakang kustom */
-    /* color: #fcfcfc; */
-    /* Warna teks kustom */
+.text-right {
+    text-align: right;
+}
+
+.menu-btn {
+    height: 100%;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    margin-left: 4px;
 }
 </style>

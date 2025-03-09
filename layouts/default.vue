@@ -1,10 +1,10 @@
 <template>
     <v-app>
-        <v-toolbar style="background-color: transparent;" elevation="1">
+        <v-toolbar color="grey-darken-4" elevation="1">
             <template v-slot:prepend>
                 <v-app-bar-nav-icon @click="toggleMenu"></v-app-bar-nav-icon>
                 <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80, width: 200 }"
-                    @click="handleImageAdClick" class="mr-5" />
+                    @click="handleClickImg" class="mr-5" />
             </template>
             <v-spacer></v-spacer>
             <v-toolbar-items>
@@ -23,11 +23,11 @@
             <v-btn icon="mdi-dots-vertical"></v-btn>
         </v-toolbar>
 
-        <v-toolbar v-if="subMenuToolbarVisible" elevation="1">
+        <v-toolbar v-if="subMenuToolbarVisible" elevation="1" flat density="compact" color="grey-darken-3">
             <v-container fluid>
                 <v-row justify="center">
                     <v-col cols="auto">
-                        <v-toolbar-items>
+                        <v-toolbar-items variant="text">
                             <v-btn v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
                                 slim variant="text" rounded="false" @click="navigate(subMenu)">
                                 <v-icon class="mr-1" size="27" color="grey-lighten-1">{{ subMenu.icon }}</v-icon>
@@ -63,9 +63,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useTheme } from 'vuetify';
+import { useRoute } from 'vue-router';
 import ArticleDetailDialog from "@/components/core/articleDetailDialog.vue";
 import Ads from "~/components/Ads.vue";
 
+const route = useRoute();
 const articleDialog = ref(null);
 defineExpose({ articleDialog });
 
@@ -73,7 +75,7 @@ const theme = useTheme();
 const isLoading = ref(true);
 const sideMenu = ref(false);
 const imgLogo = "/images/metrobalimlogo.webp";
-const activeSubMenu = ref(null);
+const activeMenu = ref(null);
 const subMenuToolbarVisible = ref(false);
 const selectedSubMenu = ref({});
 
@@ -107,14 +109,22 @@ const menus = ref([
             { title: "Sastra", icon: "mdi-book-open-page-variant", categoryId: "/article/sastra" },
             { title: "Bisnis", icon: "mdi-chart-bar", categoryId: "/article/bisnis", badge: "HOT" },
             { title: "HIV-AIDS", icon: "mdi-ribbon", categoryId: "/article/hiv-aids" },
+            { title: "Kesehatan", icon: "mdi-doctor", categoryId: "/article/video" },
+            { title: "Pendidikan", icon: "mdi-book-open", categoryId: "/article/video" },
+            { title: "Sport", icon: "mdi-book-open", categoryId: "/article/video" },
         ]
     },
-    { title: "Kesehatan", icon: "mdi-doctor", categoryId: "/article/video" },
-    { title: "Pendidikan", icon: "mdi-book-open", categoryId: "/article/video" }
 ]);
 
 onMounted(() => {
     isLoading.value = false;
+    const currentPath = route.path;
+    const foundMenu = menus.value.find(menu => currentPath == menu.categoryId);
+    if (foundMenu && foundMenu.subMenu) {
+        showSubMenuToolbar(foundMenu);
+    } else if (foundMenu) {
+        activeMenu.value = foundMenu;
+    }
 });
 
 const toggleMenu = () => {
@@ -122,27 +132,43 @@ const toggleMenu = () => {
 };
 
 const navigate = (menu) => {
-    console.log(`Navigating to ${menu.categoryId}`);
     sideMenu.value = false;
     subMenuToolbarVisible.value = false;
+    activeMenu.value = menus.value.find(mainMenu => mainMenu.subMenu && mainMenu.subMenu.some(sub => sub.title === menu.title)) || menus.value.find(mainMenu => mainMenu.title === menu.title) || null;
 };
 
 const handleSearch = () => {
     console.log("Search clicked");
+    alert("search");
 };
+
+const handleClickImg = () => {
+    route.path("/");
+};
+
+const handleProfile = () => {
+    alert("profile");
+};
+
+
+
+
 
 const showSubMenuToolbar = (menu) => {
     if (menu.subMenu) {
         subMenuToolbarVisible.value = true;
         selectedSubMenu.value = menu;
+        activeMenu.value = menu;
     }
 };
 
 const hideSubMenuToolbar = () => {
     subMenuToolbarVisible.value = false;
     selectedSubMenu.value = {};
+    activeMenu.value = null;
 };
 </script>
+
 
 <style scoped>
 .sub-menu-toolbar {

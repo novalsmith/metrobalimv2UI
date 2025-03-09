@@ -26,6 +26,7 @@ export default defineNuxtPlugin((app) => {
       info: '#2196F3',
       success: '#4CAF50',
       warning: '#FB8C00',
+      toolbar: '#f0f0f0', // Warna toolbar tema terang
     },
     variables: {
       'border-color': '#000000',
@@ -62,6 +63,7 @@ export default defineNuxtPlugin((app) => {
       warning: '#FFB74D',
       onSurface: '#FFFFFF', // Warna teks untuk surface
       onBackground: '#FFFFFF', // Warna teks untuk background
+      toolbar: '#303030', // Warna toolbar tema gelap
     },
     variables: {
       'text-field-bg-color': '#303030',

@@ -54,7 +54,8 @@
             <v-col cols="12" md="7">
                 <div class="mb-8">
                     <div class="text-h5 mb-4 d-flex align-center">
-                        <v-icon class="mr-2">mdi-newspaper-variant-multiple-outline</v-icon> Terbaru
+                        <v-icon class="mr-2">mdi-newspaper-variant-multiple-outline</v-icon>
+                        Terbaru
                     </div>
                     <v-row v-if="loading">
                         <v-col v-for="a in 10" :key="a" cols="12">
@@ -67,34 +68,27 @@
                                 <v-card class="article-card" :class="{ 'on-hover': isHovering }">
                                     <v-row no-gutters>
                                         <v-col cols="12" md="5">
-                                            <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
+                                            <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
                                                 <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
                                                     <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
                                                         class="w-100 h-100" placeholder="blur" loading="lazy"
                                                         format="webp" fit="cover" style="object-fit: cover;" />
                                                 </NuxtLink>
-
                                             </v-responsive>
-                                            <!-- <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
-                                                 <v-img class="article-image" max-height="150" :lazy-src="item.image">  
-                                            <NuxtImg preset="article" placeholder="blur" loading="lazy"
-                                                v-if="item.image" :src="item.image" />
-                                       
-                                            </NuxtLink>   -->
                                         </v-col>
                                         <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
                                             <v-card-title class="text-h6 text-wrap">
                                                 <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
-                                                    class="text-decoration-none text-primary">
+                                                    class="article-link">
                                                     {{ item.title }}
                                                 </NuxtLink>
                                             </v-card-title>
-                                            <v-spacer></v-spacer> <!-- Mendorong aksi ke bawah -->
+                                            <v-spacer></v-spacer>
                                             <v-card-actions class="d-flex align-center justify-space-between">
-                                                <v-btn text small color="primary">Tanah Papua</v-btn>
+                                                <v-btn text small color="inherit">Tanah Papua</v-btn>
                                                 <span class="text-subtitle-2">1 Jam yang lalu</span>
                                                 <v-spacer></v-spacer>
-                                                <v-btn text>
+                                                <v-btn text color="inherit">
                                                     <v-icon v-if="articles[index]?.isLike"
                                                         color="red">mdi-heart</v-icon>
                                                     <v-icon v-else>mdi-heart-outline</v-icon>
@@ -104,30 +98,25 @@
                                         </v-col>
                                     </v-row>
                                 </v-card>
-
                             </v-hover>
                         </v-col>
                     </v-row>
                 </div>
             </v-col>
             <v-col cols="12" md="5" lg="5">
-                <!-- isi dengan apa -->
                 <v-container>
                     <div class="text-h5 mb-4">
                         <v-icon>mdi-trending-up</v-icon> Trending
                     </div>
                     <v-row dense>
                         <v-col v-for="(article, index) in articles.slice(0, 5)" :key="index" cols="12">
-                            <!-- Content State -->
                             <v-hover v-slot:default="{ isHovering }">
                                 <v-card :class="{ 'on-hover': isHovering }">
                                     <v-card-title class="truncated-title text-h6">
-                                        <NuxtLink to="/" class="text-decoration-none text-primary">
+                                        <NuxtLink to="/" class="article-link">
                                             {{ index + 1 }}. {{ articles[index]?.title }}
                                         </NuxtLink>
                                     </v-card-title>
-
-
                                 </v-card>
                             </v-hover>
                         </v-col>
@@ -137,57 +126,40 @@
                     <v-card class="m-2">
                         <div class="text-h5 mb-4">Follow Us</div>
                         <v-row dense justify="center" align="center">
-                            <!-- Facebook -->
                             <v-btn icon href="https://www.facebook.com/" target="_blank" color="blue darken-4"
                                 class="mr-1" title="Follow us on Facebook">
                                 <v-icon large>mdi-facebook</v-icon>
                             </v-btn>
-                            <!-- Instagram -->
                             <v-btn icon href="https://www.instagram.com/" target="_blank" color="pink darken-2"
                                 class="mr-1" title="Follow us on Instagram">
                                 <v-icon large>mdi-instagram</v-icon>
                             </v-btn>
-                            <!-- YouTube -->
                             <v-btn icon href="https://www.youtube.com/" target="_blank" color="red darken-4"
                                 class="mr-1" title="Subscribe to our YouTube channel">
                                 <v-icon large>mdi-youtube</v-icon>
                             </v-btn>
-                            <!-- Twitter -->
                             <v-btn icon href="https://twitter.com/" target="_blank" color="light-blue darken-1"
                                 class="mr-1" title="Follow us on Twitter">
                                 <v-icon large>mdi-twitter</v-icon>
                             </v-btn>
-                            <!-- WhatsApp -->
                             <v-btn icon href="https://wa.me/your-number" target="_blank" color="green darken-2"
                                 class="mr-1" title="Chat with us on WhatsApp">
                                 <v-icon large>mdi-whatsapp</v-icon>
                             </v-btn>
                         </v-row>
                     </v-card>
-
-
-
-
                 </v-container>
-
                 <v-container>
                     <v-card>
                         <Ads src="https://metrobalim.net/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-11-at-05.21.46_0b833506-768x922.jpg"
                             alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80 }"
                             @click="handleImageAdClick" />
-
                     </v-card>
                 </v-container>
-
-
-
-
-
-
             </v-col>
         </v-row>
     </v-container>
-    <v-container fluid class="bg-primary">
+    <v-container fluid class="bg-greyDarken4">
         <videoComponent />
     </v-container>
 </template>
@@ -208,7 +180,8 @@ const openArticle = (category, slug) => {
 };
 
 const loading = ref(true);
-const articles = ref([]);
+const { data: articles, pending: articlesPending } = await useFetch('/api/mockArticle');
+
 
 const tags = ref([
     'Kebakaran Glodok',
@@ -263,169 +236,25 @@ const handleSlotAdClick = () => {
     console.log("Iklan slot diklik!");
 };
 loading.value = false;
-articles.value = [
-    {
-        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-        isLike: true,
-        like: 200,
-        slug: "ole-naturalisasi-indonesia",
-        category: "sastra"
-    },
-    {
-        title: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
-        subtitle: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
-        image: "https://metrobalim.net/wp-content/uploads/2025/02/metrobalim.jpg",
-        isLike: true,
-        like: 5,
-        slug: "veliks-wangai-pemprov",
-        category: "tanah-papua"
-    },
-    {
-        title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-        subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-12.png",
-        isLike: true,
-        like: 5,
-        slug: "polda-papua",
-        category: "regional"
-    },
 
-    {
-        title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-        subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-        isLike: true,
-        like: 200,
-        slug: "warga-indonesia",
-        category: "bisnis"
-    },
-
-    {
-        title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-        subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "podcast"
-    },
-    {
-        title: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
-        subtitle: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/1.png",
-        isLike: true,
-        like: 50,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
-        subtitle: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250113-WA0039.jpg",
-        isLike: false,
-        like: 0,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua",
-        subtitle: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua.",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/1-1-1024x576.png",
-        isLike: false,
-        like: 0,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
-        subtitle: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/IMG-20250114-WA0051.jpg",
-        isLike: false,
-        like: 0,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-
-    {
-        title: "DOA di Getsemani",
-        image: "https://answeredfaith.com/wp-content/uploads/2024/11/examples-of-jesus-praying-in-the-bible-1.jpg",
-        like: 30,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-        subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-12.png",
-        isLike: true,
-        like: 5,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-        subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-
-    {
-        title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-        subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
-        subtitle: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia",
-        image: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-    {
-        title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-        subtitle: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-14-1024x576.png",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-
-    {
-        title: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-        subtitle: "Natalius Pigai: Konversi Lahan Tinggi, Masa Depan Ketahanan Pangan Terancam",
-        image: "https://metrobalim.net/wp-content/uploads/2025/01/Blue-and-Yellow-Gradient-Meditation-Youtube-Thumbnail-18-1024x576.png",
-        isLike: true,
-        like: 200,
-        slug: "natalius",
-        category: "tanah-papua"
-    },
-];
 
 
 </script>
 
 <style scoped>
+.article-link {
+    cursor: pointer;
+    color: inherit;
+    /* Menggunakan warna teks dari parent */
+    text-decoration: none;
+    /* Menghilangkan garis bawah */
+}
+
+.article-link:hover {
+    color: #1976D2;
+    /* Warna biru Vuetify saat hover */
+}
+
 .article-card:hover {
     transform: translateY(-3px);
     transition: 0.2s ease-in-out;
@@ -436,8 +265,6 @@ articles.value = [
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     line-clamp: 4;
-    /* Fallback properti */
-    /* Limit to 3 lines */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -453,7 +280,6 @@ articles.value = [
 }
 
 .article-image {
-
     border-radius: 8px;
 }
 
@@ -479,14 +305,12 @@ articles.value = [
 
 .image-responsive {
     width: 100%;
-    /* Mengisi kolom sepenuhnya */
     height: auto;
 }
 
 .article-title {
     display: -webkit-box;
     line-clamp: 3;
-    /* Batasi ke 3 baris */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

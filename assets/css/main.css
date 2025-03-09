@@ -41,3 +41,11 @@
   .v-btn--primary:hover {
     background-color: var(--primary-dark);
   }
+  a {
+    color: var(--v-link-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--v-link-hover-color);
+  }

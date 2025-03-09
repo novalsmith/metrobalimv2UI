@@ -1,6 +1,5 @@
-// import this after install `@mdi/font` package
+// plugins/vuetify.js
 import '@mdi/font/css/materialdesignicons.css';
-
 import 'vuetify/styles';
 import { createVuetify, type ThemeDefinition } from 'vuetify';
 import { md3 } from 'vuetify/blueprints';
@@ -26,7 +25,11 @@ export default defineNuxtPlugin((app) => {
       info: '#2196F3',
       success: '#4CAF50',
       warning: '#FB8C00',
-      toolbar: '#f0f0f0', // Warna toolbar tema terang
+      toolbar: '#212121', // grey-darken-4
+      subToolbar: '#424242', // grey-darken-3
+      sidebar: '#424242', // grey-darken-3
+      greyDarken4: '#212121', // grey-darken-4
+      greyDarken3: '#424242', // grey-darken-3
     },
     variables: {
       'border-color': '#000000',
@@ -45,6 +48,8 @@ export default defineNuxtPlugin((app) => {
       'theme-on-kbd': '#FFFFFF',
       'theme-code': '#F5F5F5',
       'theme-on-code': '#000000',
+      'link-color': 'inherit', // Warna link default
+      'link-hover-color': '#1976D2', // Warna link saat hover
     }
   };
 
@@ -63,13 +68,19 @@ export default defineNuxtPlugin((app) => {
       warning: '#FFB74D',
       onSurface: '#FFFFFF', // Warna teks untuk surface
       onBackground: '#FFFFFF', // Warna teks untuk background
-      toolbar: '#303030', // Warna toolbar tema gelap
+      toolbar: '#424242', // grey-darken-4
+      subToolbar: '#616161', // grey-darken-3
+      sidebar: '#424242', // grey-darken-3
+      greyDarken4: '#424242', // grey-darken-4
+      greyDarken3: '#616161', // grey-darken-3
     },
     variables: {
       'text-field-bg-color': '#303030',
       'text-field-border-color': 'rgba(255, 255, 255, 0.12)',
       'text-field-focus-color': primaryColor,
       'text-field-color': '#FFFFFF',
+      'link-color': 'inherit',
+      'link-hover-color': '#64B5F6',
     },
   };
 

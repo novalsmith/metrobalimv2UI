@@ -1,17 +1,17 @@
 <template>
     <v-app>
-        <v-toolbar color="grey-darken-4" elevation="1">
+        <v-toolbar color="toolbar">
             <template v-slot:prepend>
                 <v-app-bar-nav-icon @click="toggleMenu"></v-app-bar-nav-icon>
                 <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80, width: 200 }"
                     @click="handleClickImg" class="mr-5" />
             </template>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
+            <v-toolbar-items v-if="!isSmallScreen">
                 <v-btn v-for="(menu, i) in menus" :key="i" :to="menu.categoryId" slim variant="text" rounded="false"
                     class="custom-active-button"
                     @click="menu.subMenu ? showSubMenuToolbar(menu) : hideSubMenuToolbar()">
-                    <v-icon class="mr-1" size="27" color="grey-lighten-1">{{ menu.icon }}</v-icon>
+                    <v-icon class="mr-1" size="27">{{ menu.icon }}</v-icon>
                     {{ menu.title }}
                 </v-btn>
             </v-toolbar-items>
@@ -23,14 +23,14 @@
             <v-btn icon="mdi-dots-vertical"></v-btn>
         </v-toolbar>
 
-        <v-toolbar v-if="subMenuToolbarVisible" elevation="1" flat density="compact" color="grey-darken-3">
+        <v-toolbar v-if="!isSmallScreen && subMenuToolbarVisible" elevation="1" color="subToolbar">
             <v-container fluid>
                 <v-row justify="center">
                     <v-col cols="auto">
                         <v-toolbar-items variant="text">
                             <v-btn v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
                                 slim variant="text" rounded="false" @click="navigate(subMenu)">
-                                <v-icon class="mr-1" size="27" color="grey-lighten-1">{{ subMenu.icon }}</v-icon>
+                                <v-icon class="mr-1" size="27" :color="subMenu.color">{{ subMenu.icon }}</v-icon>
                                 {{ subMenu.title }}
                             </v-btn>
                         </v-toolbar-items>
@@ -48,11 +48,45 @@
 
         <v-footer><v-col class="text-center py-3"><span>&copy; 2025 Metrobalim. All Rights
                     Reserved.</span></v-col></v-footer>
-        <v-navigation-drawer v-model="sideMenu" temporary location="left" color="blue">
+        <v-navigation-drawer v-model="sideMenu" temporary location="left" color="sidebar" :width="drawerWidth">
             <v-container>
-                <v-list>
-                    <v-list-item v-for="(menu, i) in menus" :key="i" @click="navigate(menu)">
-                        <v-list-item-title>{{ menu.title }}</v-list-item-title>
+                <v-text-field label="Search" prepend-inner-icon="mdi-magnify" class="mb-4"></v-text-field>
+                <v-list dense>
+                    <v-list-item v-for="(menu, i) in menus" :key="i" @click="handleMenuItemClick(menu)">
+                        <template v-if="menu.subMenu">
+                            <v-list-group :value="activeMenu === menu">
+                                <template v-slot:activator="{ props }">
+                                    <v-list-item v-bind="props">
+                                        <v-list-item-title>{{ menu.title }}</v-list-item-title>
+                                    </v-list-item>
+                                </template>
+                                <v-list-item v-for="(subMenu, j) in menu.subMenu" :key="j" @click="navigate(subMenu)"
+                                    dense>
+                                    <v-list-item-title class="text-truncate">{{ subMenu.title }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list-group>
+                        </template>
+                        <template v-else>
+                            <v-list-item @click="navigate(menu)">
+                                <v-list-item-title>{{ menu.title }}</v-list-item-title>
+                            </v-list-item>
+                        </template>
+                    </v-list-item>
+                </v-list>
+                <v-divider class="my-4"></v-divider>
+                <v-list dense>
+                    <v-list-item>
+                        <v-list-item-title>Dark Theme</v-list-item-title>
+                        <template v-slot:append>
+                            <v-switch v-model="theme.global.name.value" inset :true-value="'dark'"
+                                :false-value="'light'"></v-switch>
+                        </template>
+                    </v-list-item>
+                    <v-list-item @click="handleProfile">
+                        <v-list-item-title>Profile</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item>
+                        <v-list-item-title>Settings</v-list-item-title>
                     </v-list-item>
                 </v-list>
             </v-container>
@@ -62,7 +96,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useTheme } from 'vuetify';
+import { useTheme, useDisplay } from 'vuetify';
 import { useRoute } from 'vue-router';
 import ArticleDetailDialog from "@/components/core/articleDetailDialog.vue";
 import Ads from "~/components/Ads.vue";
@@ -86,35 +120,7 @@ const toggleTheme = () => {
 const menuIcon = computed(() => (sideMenu.value ? 'mdi-close' : 'mdi-menu'));
 const currentThemeIcon = computed(() => theme.global.current.value.dark ? 'mdi-weather-night' : 'mdi-brightness-7');
 
-const menus = ref([
-    { title: "Home", icon: "mdi-home", categoryId: "/" },
-    {
-        title: "Tanah Papua", icon: "mdi-heart", categoryId: "/article/tanah-papua",
-        subMenu: [
-            { title: "Papua", icon: "mdi-earth", categoryId: "/article/regional" },
-            { title: "Papua Tengah", icon: "mdi-earth", categoryId: "/article/regional" },
-            { title: "Papua Pegunungan", icon: "mdi-earth", categoryId: "/article/regional" },
-            { title: "Papua Selatan", icon: "mdi-earth", categoryId: "/article/regional" },
-            { title: "Papua Barat", icon: "mdi-earth", categoryId: "/article/regional" },
-            { title: "Papua Barat Daya", icon: "mdi-earth", categoryId: "/article/regional" },
-        ]
-    },
-    { title: "Nasional", icon: "mdi-earth", categoryId: "/article/regional" },
-    { title: "Internasional", icon: "mdi-web", categoryId: "/article/internasional", badge: "NEW" },
-    {
-        title: "Insight", icon: "mdi-lightbulb-on", categoryId: "/article/insight",
-        subMenu: [
-            { title: "Podcast", icon: "mdi-podcast", categoryId: "/article/podcast" },
-            { title: "Jurnal", icon: "mdi-newspaper", categoryId: "/article/jurnal" },
-            { title: "Sastra", icon: "mdi-book-open-page-variant", categoryId: "/article/sastra" },
-            { title: "Bisnis", icon: "mdi-chart-bar", categoryId: "/article/bisnis", badge: "HOT" },
-            { title: "HIV-AIDS", icon: "mdi-ribbon", categoryId: "/article/hiv-aids" },
-            { title: "Kesehatan", icon: "mdi-doctor", categoryId: "/article/video" },
-            { title: "Pendidikan", icon: "mdi-book-open", categoryId: "/article/video" },
-            { title: "Sport", icon: "mdi-book-open", categoryId: "/article/video" },
-        ]
-    },
-]);
+const { data: menus, pending: menusPending } = await useFetch('/api/mockMenu');
 
 onMounted(() => {
     isLoading.value = false;
@@ -126,6 +132,7 @@ onMounted(() => {
         activeMenu.value = foundMenu;
     }
 });
+
 
 const toggleMenu = () => {
     sideMenu.value = !sideMenu.value;
@@ -143,16 +150,12 @@ const handleSearch = () => {
 };
 
 const handleClickImg = () => {
-    route.path("/");
+    route
 };
 
 const handleProfile = () => {
     alert("profile");
 };
-
-
-
-
 
 const showSubMenuToolbar = (menu) => {
     if (menu.subMenu) {
@@ -167,18 +170,15 @@ const hideSubMenuToolbar = () => {
     selectedSubMenu.value = {};
     activeMenu.value = null;
 };
+
+// Breakpoint and Responsive Logic
+const { smAndDown } = useDisplay();
+const isSmallScreen = computed(() => smAndDown.value);
+const drawerWidth = computed(() => isSmallScreen.value ? '90%' : '300');
 </script>
 
-
 <style scoped>
-.sub-menu-toolbar {
-    background-color: #f0f0f0;
-}
-
-.custom-active-button.v-btn--active {
-    /* background-color: #bfdcff; */
-    /* Warna latar belakang kustom */
-    /* color: #fcfcfc; */
-    /* Warna teks kustom */
+.v-navigation-drawer {
+    padding: 1rem;
 }
 </style>

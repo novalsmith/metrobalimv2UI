@@ -23,20 +23,35 @@
             <v-btn icon="mdi-dots-vertical"></v-btn>
         </v-toolbar>
 
-        <v-toolbar v-if="!isSmallScreen && subMenuToolbarVisible" elevation="1" color="subToolbar">
-            <v-container fluid>
-                <v-row justify="center">
-                    <v-col cols="auto">
-                        <v-toolbar-items variant="text">
-                            <v-btn v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
-                                slim variant="text" rounded="false" @click="navigate(subMenu)">
-                                <v-icon class="mr-1" size="27" :color="subMenu.color">{{ subMenu.icon }}</v-icon>
-                                {{ subMenu.title }}
-                            </v-btn>
-                        </v-toolbar-items>
-                    </v-col>
-                </v-row>
-            </v-container>
+        <v-toolbar flat v-if="!isSmallScreen && subMenuToolbarVisible" elevation="1" color="subToolbar"
+            density="compact">
+            <!-- <v-container fluid> -->
+            <v-row justify="center">
+                <!-- <v-col cols="auto"> -->
+                <v-toolbar-items>
+                    <!-- <v-btn variant="text" v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
+                    @click="navigate(subMenu)">
+                    <v-icon class="mr-1" :color="subMenu.color">{{ subMenu.icon }}</v-icon>
+                    {{ subMenu.title }}
+                </v-btn> -->
+
+
+                    <!-- <v-row no-gutters> -->
+                    <!-- <v-col v-for="(menu, i) in selectedSubMenu.subMenu" :key="i"> -->
+                    <v-list-item :to="menu.categoryId" v-for="(menu, i) in selectedSubMenu.subMenu" :key="i">
+
+                        <v-list-item-title class="text-capitalize">
+                            <!-- <template v-slot:prepend> -->
+                            <!-- <v-icon :icon="menu.icon"></v-icon> -->
+                            <!-- </template> -->
+                            {{ menu.title }}</v-list-item-title>
+                    </v-list-item>
+                    <!-- </v-col> -->
+                    <!-- </v-row> -->
+                </v-toolbar-items>
+                <!-- </v-col> -->
+            </v-row>
+            <!-- </v-container> -->
         </v-toolbar>
 
         <v-main>

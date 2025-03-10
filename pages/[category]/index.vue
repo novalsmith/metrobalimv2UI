@@ -4,6 +4,7 @@
             <v-col cols="12" md="8">
                 <v-card>
                     <!-- Gambar Header -->
+                    <h1>section Index</h1>
                     <v-img v-if="filteredArticle?.image" :src="filteredArticle.image" height="300" cover></v-img>
 
                     <v-card-title class="article-title">

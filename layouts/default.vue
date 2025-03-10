@@ -9,10 +9,11 @@
             <v-spacer></v-spacer>
             <v-toolbar-items v-if="!isSmallScreen">
                 <v-btn v-for="(menu, i) in menus" :key="i" :to="menu.categoryId" slim variant="text" rounded="false"
-                    class="custom-active-button"
+                    :active="activeMenu != null && activeMenu.categoryId === menu.categoryId ? true : false"
                     @click="menu.subMenu ? showSubMenuToolbar(menu) : hideSubMenuToolbar()">
                     <v-icon class="mr-1" size="27">{{ menu.icon }}</v-icon>
                     {{ menu.title }}
+
                 </v-btn>
             </v-toolbar-items>
             <v-spacer></v-spacer>
@@ -23,35 +24,21 @@
             <v-btn icon="mdi-dots-vertical"></v-btn>
         </v-toolbar>
 
-        <v-toolbar flat v-if="!isSmallScreen && subMenuToolbarVisible" elevation="1" color="subToolbar"
-            density="compact">
-            <!-- <v-container fluid> -->
-            <v-row justify="center">
-                <!-- <v-col cols="auto"> -->
-                <v-toolbar-items>
-                    <!-- <v-btn variant="text" v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
-                    @click="navigate(subMenu)">
-                    <v-icon class="mr-1" :color="subMenu.color">{{ subMenu.icon }}</v-icon>
-                    {{ subMenu.title }}
-                </v-btn> -->
+        <v-toolbar v-if="!isSmallScreen && subMenuToolbarVisible" elevation="1" color="subToolbar">
+            <v-container fluid>
+                <v-row justify="center">
+                    <v-col cols="auto">
+                        <v-toolbar-items variant="text">
+                            <v-btn v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
+                                slim variant="text" rounded="false" @click="navigate(subMenu)">
+                                <v-icon class="mr-1" size="27" :color="subMenu.color">{{ subMenu.icon }}</v-icon>
+                                {{ subMenu.title }}
+                            </v-btn>
+                        </v-toolbar-items>
+                    </v-col>
+                </v-row>
+            </v-container>
 
-
-                    <!-- <v-row no-gutters> -->
-                    <!-- <v-col v-for="(menu, i) in selectedSubMenu.subMenu" :key="i"> -->
-                    <v-list-item :to="menu.categoryId" v-for="(menu, i) in selectedSubMenu.subMenu" :key="i">
-
-                        <v-list-item-title class="text-capitalize">
-                            <!-- <template v-slot:prepend> -->
-                            <!-- <v-icon :icon="menu.icon"></v-icon> -->
-                            <!-- </template> -->
-                            {{ menu.title }}</v-list-item-title>
-                    </v-list-item>
-                    <!-- </v-col> -->
-                    <!-- </v-row> -->
-                </v-toolbar-items>
-                <!-- </v-col> -->
-            </v-row>
-            <!-- </v-container> -->
         </v-toolbar>
 
         <v-main>
@@ -137,10 +124,16 @@ const currentThemeIcon = computed(() => theme.global.current.value.dark ? 'mdi-w
 
 const { data: menus, pending: menusPending } = await useFetch('/api/mockMenu');
 
+const parseValue = (value) => {
+    const currentPath = value.split("/");
+};
+
 onMounted(() => {
     isLoading.value = false;
-    const currentPath = route.path;
-    const foundMenu = menus.value.find(menu => currentPath == menu.categoryId);
+    const currentPath = route.path.split("/");
+    const foundMenu = menus.value.find(menu => {
+        return menu.categoryId != "/";
+    });
     if (foundMenu && foundMenu.subMenu) {
         showSubMenuToolbar(foundMenu);
     } else if (foundMenu) {
@@ -155,12 +148,11 @@ const toggleMenu = () => {
 
 const navigate = (menu) => {
     sideMenu.value = false;
-    subMenuToolbarVisible.value = false;
-    activeMenu.value = menus.value.find(mainMenu => mainMenu.subMenu && mainMenu.subMenu.some(sub => sub.title === menu.title)) || menus.value.find(mainMenu => mainMenu.title === menu.title) || null;
+    // subMenuToolbarVisible.value = false;
+    activeMenu.value = menus.value.find(mainMenu => mainMenu.subMenu && mainMenu.subMenu.some(sub => sub.categoryId === menu.categoryId)) || menus.value.find(mainMenu => mainMenu.categoryId === menu.categoryId) || null;
 };
 
 const handleSearch = () => {
-    console.log("Search clicked");
     alert("search");
 };
 
@@ -192,8 +184,9 @@ const isSmallScreen = computed(() => smAndDown.value);
 const drawerWidth = computed(() => isSmallScreen.value ? '90%' : '300');
 </script>
 
+
 <style scoped>
-.v-navigation-drawer {
-    padding: 1rem;
+.text-right {
+    text-align: right;
 }
 </style>

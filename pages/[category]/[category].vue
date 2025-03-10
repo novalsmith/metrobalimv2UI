@@ -4,7 +4,7 @@
             <v-col cols="12" md="10">
                 <v-card elevation="0">
                     <!-- Gambar Header -->
-                    <h1>section 1</h1>
+                    <h1>section category 2</h1>
                     <v-img v-if="filteredArticle?.image" :src="filteredArticle.image" max-height="500" cover></v-img>
 
                     <v-card-title class="article-title text-wrap">

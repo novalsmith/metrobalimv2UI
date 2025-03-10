@@ -83,6 +83,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+// import { getArticleLink } from '@/server/mockData/article'; // Sesuaikan dengan path file articles.ts
+
 
 const router = useRouter();
 const loading = ref(true);
@@ -93,6 +95,7 @@ if (articlesPending) {
 }
 
 const openArticle = (value) => {
+    // getArticleLink(value);
     router.push(`/article/${value.category}/${value.slug}`);
 };
 </script>

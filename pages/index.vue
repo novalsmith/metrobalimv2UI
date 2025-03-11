@@ -24,37 +24,38 @@
             </v-chip-group>
 
         </CustomCard>
-        <!-- <v-skeleton-loader :loading="loading" type="text">
-            <v-row>
-                <v-col cols="2">
-                    <div class="text-h6 mb-4">
-                        <v-icon>mdi-fire</v-icon> Topik Populer
-                    </div>
-                </v-col>
-                <v-col cols="10">
-                    <v-chip-group v-if="!loading" variant="outlined" selectedClass="text-info">
-                        <v-chip v-for="tag in tags" :key="tag" class="rounded" :text="tag"></v-chip>
-                    </v-chip-group>
-                    <v-chip-group v-else>
-                        <v-chip class="rounded">Loading...</v-chip>
-                    </v-chip-group>
 
-                </v-col>
-            </v-row>
-        </v-skeleton-loader> -->
+
+
+
     </v-container>
 
-    <!-- headlines -->
 
-    <headlinesComponent />
-    <!-- headlines -->
+    <v-container>
+        <CustomCard>
+            <!-- headlines -->
+            <!-- Tabs untuk Headline dan Video -->
+            <v-tabs v-model="tab">
+                <v-tab value="headline"><v-icon size="25" class="mr-2">mdi-newspaper-variant-outline</v-icon>
+                    Headline</v-tab>
+                <v-tab value="video"> <v-icon size="25" class="mr-2">mdi-video</v-icon> Live Update</v-tab>
+            </v-tabs>
 
-    <!-- ads -->
-    <!-- <adsComponent /> -->
+            <v-window v-model="tab">
+                <!-- Tab Headline -->
+                <v-window-item value="headline">
+                    <headlinesComponent />
+                </v-window-item>
 
-    <!-- ads -->
+                <!-- Tab Video -->
+                <v-window-item value="video">
+                    <videoComponent />
+                </v-window-item>
+            </v-window>
+        </CustomCard>
+    </v-container>
 
-    <!-- article Terbaru -->
+
     <v-container>
 
         <v-row>
@@ -115,7 +116,7 @@
                 </CustomCard>
 
 
-                <CustomCard title="Follow Us" class="mb-5">
+                <CustomCard class="mb-5">
                     <v-row dense justify="center" align="center">
                         <v-btn icon href="https://www.facebook.com/" target="_blank" color="blue darken-4" class="mr-1"
                             title="Follow us on Facebook">
@@ -143,7 +144,7 @@
 
 
 
-                <CustomCard title="Bersatu Membangun" class="mb-5">
+                <CustomCard class="mb-5">
 
                     <Ads src="https://metrobalim.net/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-11-at-05.21.46_0b833506-768x922.jpg"
                         alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80 }"
@@ -157,9 +158,14 @@
 
 
     </v-container>
-    <v-container fluid class="bg-greyDarken4">
-        <videoComponent />
-    </v-container>
+
+    <!-- <v-container>
+        <CustomCard title="Live Update" class="mb-5">
+            <videoComponent />
+        </CustomCard>
+    </v-container> -->
+
+
 </template>
 
 <script setup>
@@ -172,6 +178,7 @@ import headlinesComponent from "@/components/headlines.vue";
 import { useRouter } from "vue-router";
 import CustomCard from "@/components/CustomCard.vue";
 
+const tab = ref("headline");
 
 const router = useRouter();
 
@@ -194,34 +201,6 @@ const tags = ref([
     'Tech',
     'Creative Writing',
 ]);
-
-const imageAdConfig = {
-    imageProps: {
-        src: "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp",
-        alt: "Iklan Metro Bali",
-        modifiers: { format: 'webp', quality: 80, height: 200 },
-        presets: "ads"
-    },
-    class: 'my-image-ad',
-    style: 'margin-bottom: 20px;',
-};
-
-
-// Konfigurasi Iklan Teks
-const textAdConfig = {
-    src: "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp",
-    alt: "Iklan Metro Bali",
-    modifiers: { format: 'webp', quality: 80 },
-    text: "Promo Spesial!",
-};
-
-// Konfigurasi Iklan dengan Slot
-const slotAdConfig = {
-    src: "https://metrobalim.net/wp-content/uploads/2024/10/Blue-Simple-Printing-Services-Etsy-Shop-Cover-1.webp",
-    alt: "Iklan Metro Bali",
-    modifiers: { format: 'webp', quality: 80 },
-    text: "Promo Spesial!",
-};
 
 // Fungsi Penanganan Klik Iklan
 const handleImageAdClick = () => {

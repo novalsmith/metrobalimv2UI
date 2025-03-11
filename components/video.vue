@@ -1,57 +1,57 @@
 <template>
-    <v-container>
-        <div class="text-h5 mb-4 d-flex align-center">
+    <!-- <v-container> -->
+    <!-- <div class="text-h5 mb-4 d-flex align-center">
             <v-icon class="mr-2">mdi-video</v-icon> Live Update
-        </div>
-        <v-row>
-            <!-- Playlist Video -->
-            <v-col md="5" sm="12" lg="5">
-                <v-list>
-                    <v-list-item v-for="(video, index) in articles" :key="index" @click="selectVideo(video)"
-                        class="video-list-item" :class="{ 'active-video': currentVideo.title === video.title }">
+        </div> -->
+    <v-row>
+        <!-- Playlist Video -->
+        <v-col md="5" sm="12" lg="5">
+            <v-list>
+                <v-list-item v-for="(video, index) in articles" :key="index" @click="selectVideo(video)"
+                    class="video-list-item" :class="{ 'active-video': currentVideo.title === video.title }">
 
-                        <v-row>
-                            <v-col cols="4">
-                                <v-img height="80" :lazy-src="video.image" class="video-thumbnail article-image">
-                                    <NuxtImg v-if="video.image" loading="lazy" placeholder :src="video.image" />
-                                    <div class="overlay-small">
-                                        <v-icon class="play-icon" color="white">mdi-play-circle-outline</v-icon>
-                                    </div>
-                                </v-img>
-                            </v-col>
-                            <v-col cols="8">
-                                <v-list-item-title class="truncated-title">
-                                    {{ video.title }}
-                                </v-list-item-title>
-                                <v-list-item-subtitle>1 Jam yang lalu</v-list-item-subtitle>
-                            </v-col>
-                        </v-row>
-                    </v-list-item>
-                </v-list>
-            </v-col>
+                    <v-row>
+                        <v-col cols="4">
+                            <v-img height="80" :lazy-src="video.image" class="video-thumbnail article-image">
+                                <NuxtImg v-if="video.image" loading="lazy" placeholder :src="video.image" />
+                                <div class="overlay-small">
+                                    <v-icon class="play-icon" color="white">mdi-play-circle-outline</v-icon>
+                                </div>
+                            </v-img>
+                        </v-col>
+                        <v-col cols="8">
+                            <v-list-item-title class="truncated-title">
+                                {{ video.title }}
+                            </v-list-item-title>
+                            <v-list-item-subtitle>1 Jam yang lalu</v-list-item-subtitle>
+                        </v-col>
+                    </v-row>
+                </v-list-item>
+            </v-list>
+        </v-col>
 
-            <!-- Pemutar Video Utama -->
-            <v-col md="7" sm="12" lg="7">
-                <v-card>
-                    <NVVideo :videoSrc="currentVideo.videoUrl" />
-                    <v-card-title class="text-wrap text-h6 truncated-title">
-                        {{ currentVideo.title }}
-                    </v-card-title>
-                    <v-card-actions class="d-flex align-center justify-space-between">
-                        <v-btn text small color="primary">Tanah Papua</v-btn>
-                        <span class="text-caption ml-2">1 Jam yang lalu</span>
-                        <v-spacer></v-spacer>
-                        <v-btn text @click="toggleLike(currentVideo)">
-                            <v-icon :color="currentVideo.isLike ? 'red' : ''">
-                                {{ currentVideo.isLike ? 'mdi-heart' : 'mdi-heart-outline' }}
-                            </v-icon>
-                            {{ currentVideo.like }}
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-container>
+        <!-- Pemutar Video Utama -->
+        <v-col md="7" sm="12" lg="7">
+            <v-card>
+                <NVVideo :videoSrc="currentVideo.videoUrl" />
+                <v-card-title class="text-wrap text-h6 truncated-title">
+                    {{ currentVideo.title }}
+                </v-card-title>
+                <v-card-actions class="d-flex align-center justify-space-between">
+                    <v-btn text small color="primary">Tanah Papua</v-btn>
+                    <span class="text-caption ml-2">1 Jam yang lalu</span>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="toggleLike(currentVideo)">
+                        <v-icon :color="currentVideo.isLike ? 'red' : ''">
+                            {{ currentVideo.isLike ? 'mdi-heart' : 'mdi-heart-outline' }}
+                        </v-icon>
+                        {{ currentVideo.like }}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-col>
+    </v-row>
+    <!-- </v-container> -->
 </template>
 
 <script setup>

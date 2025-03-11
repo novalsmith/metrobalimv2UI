@@ -11,7 +11,7 @@ export default defineNuxtPlugin((app) => {
   const light: ThemeDefinition = {
     dark: false,
     colors: {
-      background: '##fafafa',
+      background: '#e3e9f5',
       surface: '#FFFFFF',
       'surface-bright': '#FFFFFF',
       'surface-light': '#EEEEEE',
@@ -50,7 +50,7 @@ export default defineNuxtPlugin((app) => {
       'theme-on-code': '#000000',
       'link-color': 'inherit', // Warna link default
       'link-hover-color': '#1976D2', // Warna link saat hover
-    }
+    },
   };
 
   const dark: ThemeDefinition = {
@@ -86,9 +86,34 @@ export default defineNuxtPlugin((app) => {
 
   const vuetify = createVuetify({
     defaults: {
+      
       VAppBar: {},
       global: {
         ripple: true,
+      },
+      VContainer: {
+        fluid: false, // Atur default fluid ke false
+        style: 'max-width: 1700px; margin: 0 auto;', // Atur lebar maksimum dan margin
+      },
+      VTextField: {
+        variant: 'outlined', // Atur default variant text field
+      },
+      VBtn: {
+        rounded: 'md', // Atur default button rounded
+      },
+      VCard: {
+        rounded: 'xl', // Atur default button rounded
+      },
+      typography: { // Tambahkan typography di dalam theme
+        defaultFontFamily: 'Roboto, sans-serif',
+        h1: { fontSize: '3rem', fontWeight: '500' },
+        h2: { fontSize: '2.5rem', fontWeight: '500' },
+        h3: { fontSize: '2rem', fontWeight: '500' },
+        h4: { fontSize: '1.75rem', fontWeight: '500' },
+        h5: { fontSize: '1.5rem', fontWeight: '500' },
+        h6: { fontSize: '1.25rem', fontWeight: '500' },
+        body1: { fontSize: '1rem' },
+        body2: { fontSize: '0.875rem' },
       },
     },
     icons: {
@@ -106,6 +131,11 @@ export default defineNuxtPlugin((app) => {
         light,
         dark,
       },
+    
+    },
+    
+    display: {
+      mobileBreakpoint: 'sm', // Mengatur mobile breakpoint
     },
   });
 

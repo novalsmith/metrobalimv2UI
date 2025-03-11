@@ -1,6 +1,6 @@
 <template>
-    <v-responsive :max-height="maxHeight" @click="handleClick">
-        <nvimg :src="src" :alt="alt" :width="width" :height="height" :format="format" :quality="quality" :fit="fit"
+    <v-responsive @click="handleClick" fill-width>
+        <nvimg :src="src" :alt="alt" width="100%" :height="height" :format="format" :quality="quality" :fit="fit"
             :modifiers="modifiers" />
     </v-responsive>
 </template>

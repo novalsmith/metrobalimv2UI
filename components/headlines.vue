@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-row>
+        <v-row no-gutters>
             <v-col md="6" sm="12" lg="6" class="content-col">
                 <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
                     <NuxtLink @click.prevent="openArticle(articles[0])" class="article-link">
@@ -103,6 +103,7 @@ const openArticle = (article) => {
 .truncated-title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;

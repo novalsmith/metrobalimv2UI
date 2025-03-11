@@ -1,13 +1,13 @@
 <template>
   <!-- <v-app> -->
-    <v-layout>
-      <!-- Layout utama Nuxt -->
-      <NuxtLayout>
-        <KeepAlive>
-          <NuxtPage />
-        </KeepAlive>
-      </NuxtLayout>
-    </v-layout>
+  <v-layout>
+    <!-- Layout utama Nuxt -->
+    <NuxtLayout>
+      <KeepAlive>
+        <NuxtPage />
+      </KeepAlive>
+    </NuxtLayout>
+  </v-layout>
   <!-- </v-app> -->
 </template>
 

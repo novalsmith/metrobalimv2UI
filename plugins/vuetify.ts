@@ -11,7 +11,7 @@ export default defineNuxtPlugin((app) => {
   const light: ThemeDefinition = {
     dark: false,
     colors: {
-      background: '#FFFFFF',
+      background: '##fafafa',
       surface: '#FFFFFF',
       'surface-bright': '#FFFFFF',
       'surface-light': '#EEEEEE',
@@ -56,7 +56,7 @@ export default defineNuxtPlugin((app) => {
   const dark: ThemeDefinition = {
     dark: true,
     colors: {
-      background: '#121212',
+      background: '#212121',
       surface: '#1E1E1E',
       primary: primaryColor,
       'primary-darken-1': '#1565C0',

@@ -18,7 +18,13 @@
 
     <!-- Topik Populer -->
     <v-container>
-        <v-skeleton-loader :loading="loading" type="text">
+        <CustomCard title="Topik Populer">
+            <v-chip-group variant="outlined" selectedClass="text-info">
+                <v-chip v-for="tag in tags" :key="tag" class="rounded" :text="tag"></v-chip>
+            </v-chip-group>
+
+        </CustomCard>
+        <!-- <v-skeleton-loader :loading="loading" type="text">
             <v-row>
                 <v-col cols="2">
                     <div class="text-h6 mb-4">
@@ -35,7 +41,7 @@
 
                 </v-col>
             </v-row>
-        </v-skeleton-loader>
+        </v-skeleton-loader> -->
     </v-container>
 
     <!-- headlines -->
@@ -50,114 +56,106 @@
 
     <!-- article Terbaru -->
     <v-container>
-        <v-row no-gutters>
+
+        <v-row>
             <v-col cols="12" md="7">
-                <div class="mb-8">
-                    <div class="text-h5 mb-4 d-flex align-center">
-                        <v-icon class="mr-2">mdi-newspaper-variant-multiple-outline</v-icon>
-                        Terbaru
-                    </div>
-                    <v-row v-if="loading">
-                        <v-col v-for="a in 10" :key="a" cols="12">
-                            <v-skeleton-loader type="card"></v-skeleton-loader>
-                        </v-col>
-                    </v-row>
-                    <v-row v-else>
+                <CustomCard title="Terbaru">
+                    <v-row>
                         <v-col v-for="(item, index) in articles.slice(3, 10)" :key="index" cols="12">
-                            <v-hover v-slot:default="{ isHovering }">
-                                <v-card class="article-card" :class="{ 'on-hover': isHovering }">
-                                    <v-row no-gutters>
-                                        <v-col cols="12" md="5">
-                                            <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
-                                                <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
-                                                    <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
-                                                        class="w-100 h-100" placeholder="blur" loading="lazy"
-                                                        format="webp" fit="cover" style="object-fit: cover;" />
-                                                </NuxtLink>
-                                            </v-responsive>
-                                        </v-col>
-                                        <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
-                                            <v-card-title class="text-h6 text-wrap">
-                                                <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
-                                                    class="article-link">
-                                                    {{ item.title }}
-                                                </NuxtLink>
-                                            </v-card-title>
-                                            <v-spacer></v-spacer>
-                                            <v-card-actions class="d-flex align-center justify-space-between">
-                                                <v-btn text small color="inherit">Tanah Papua</v-btn>
-                                                <span class="text-subtitle-2">1 Jam yang lalu</span>
-                                                <v-spacer></v-spacer>
-                                                <v-btn text color="inherit">
-                                                    <v-icon v-if="articles[index]?.isLike"
-                                                        color="red">mdi-heart</v-icon>
-                                                    <v-icon v-else>mdi-heart-outline</v-icon>
-                                                    {{ articles[index]?.like }}
-                                                </v-btn>
-                                            </v-card-actions>
-                                        </v-col>
-                                    </v-row>
-                                </v-card>
-                            </v-hover>
-                        </v-col>
-                    </v-row>
-                </div>
-            </v-col>
-            <v-col cols="12" md="5" lg="5">
-                <v-container>
-                    <div class="text-h5 mb-4">
-                        <v-icon>mdi-trending-up</v-icon> Trending
-                    </div>
-                    <v-row dense>
-                        <v-col v-for="(article, index) in articles.slice(0, 5)" :key="index" cols="12">
-                            <v-hover v-slot:default="{ isHovering }">
-                                <v-card :class="{ 'on-hover': isHovering }">
-                                    <v-card-title class="truncated-title text-h6">
-                                        <NuxtLink to="/" class="article-link">
-                                            {{ index + 1 }}. {{ articles[index]?.title }}
+                            <v-row>
+                                <v-col cols="12" md="5">
+                                    <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
+                                        <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                            <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
+                                                class="w-100 h-100" placeholder="blur" loading="lazy" format="webp"
+                                                fit="cover" style="object-fit: cover;" />
+                                        </NuxtLink>
+                                    </v-responsive>
+                                </v-col>
+                                <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
+                                    <v-card-title class="text-h6 text-wrap">
+                                        <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
+                                            class="article-link">
+                                            {{ item.title }}
                                         </NuxtLink>
                                     </v-card-title>
-                                </v-card>
-                            </v-hover>
+                                    <v-spacer></v-spacer>
+                                    <v-card-actions class="d-flex align-center justify-space-between">
+                                        <v-btn text small color="inherit">Tanah Papua</v-btn>
+                                        <span class="text-subtitle-2">1 Jam yang lalu</span>
+                                        <v-spacer></v-spacer>
+                                        <v-btn text color="inherit">
+                                            <v-icon v-if="articles[index]?.isLike" color="red">mdi-heart</v-icon>
+                                            <v-icon v-else>mdi-heart-outline</v-icon>
+                                            {{ articles[index]?.like }}
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-col>
+                            </v-row>
+                            <v-divider></v-divider>
+
                         </v-col>
                     </v-row>
-                </v-container>
-                <v-container>
-                    <v-card class="m-2">
-                        <div class="text-h5 mb-4">Follow Us</div>
-                        <v-row dense justify="center" align="center">
-                            <v-btn icon href="https://www.facebook.com/" target="_blank" color="blue darken-4"
-                                class="mr-1" title="Follow us on Facebook">
-                                <v-icon large>mdi-facebook</v-icon>
-                            </v-btn>
-                            <v-btn icon href="https://www.instagram.com/" target="_blank" color="pink darken-2"
-                                class="mr-1" title="Follow us on Instagram">
-                                <v-icon large>mdi-instagram</v-icon>
-                            </v-btn>
-                            <v-btn icon href="https://www.youtube.com/" target="_blank" color="red darken-4"
-                                class="mr-1" title="Subscribe to our YouTube channel">
-                                <v-icon large>mdi-youtube</v-icon>
-                            </v-btn>
-                            <v-btn icon href="https://twitter.com/" target="_blank" color="light-blue darken-1"
-                                class="mr-1" title="Follow us on Twitter">
-                                <v-icon large>mdi-twitter</v-icon>
-                            </v-btn>
-                            <v-btn icon href="https://wa.me/your-number" target="_blank" color="green darken-2"
-                                class="mr-1" title="Chat with us on WhatsApp">
-                                <v-icon large>mdi-whatsapp</v-icon>
-                            </v-btn>
-                        </v-row>
-                    </v-card>
-                </v-container>
-                <v-container>
-                    <v-card>
-                        <Ads src="https://metrobalim.net/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-11-at-05.21.46_0b833506-768x922.jpg"
-                            alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80 }"
-                            @click="handleImageAdClick" />
-                    </v-card>
-                </v-container>
+                </CustomCard>
+
+            </v-col>
+            <v-col cols="12" md="5" lg="5">
+                <CustomCard title="Trending" class="mb-5">
+                    <v-list>
+                        <v-list-item class="truncated-title" v-for="(article, index) in articles.slice(0, 5)"
+                            :key="index">
+                            <NuxtLink to="/" class="article-link">
+                                {{ index + 1 }}. {{ articles[index]?.title }}
+                            </NuxtLink>
+                        </v-list-item>
+
+                    </v-list>
+
+
+                </CustomCard>
+
+
+                <CustomCard title="Follow Us" class="mb-5">
+                    <v-row dense justify="center" align="center">
+                        <v-btn icon href="https://www.facebook.com/" target="_blank" color="blue darken-4" class="mr-1"
+                            title="Follow us on Facebook">
+                            <v-icon large>mdi-facebook</v-icon>
+                        </v-btn>
+                        <v-btn icon href="https://www.instagram.com/" target="_blank" color="pink darken-2" class="mr-1"
+                            title="Follow us on Instagram">
+                            <v-icon large>mdi-instagram</v-icon>
+                        </v-btn>
+                        <v-btn icon href="https://www.youtube.com/" target="_blank" color="red darken-4" class="mr-1"
+                            title="Subscribe to our YouTube channel">
+                            <v-icon large>mdi-youtube</v-icon>
+                        </v-btn>
+                        <v-btn icon href="https://twitter.com/" target="_blank" color="light-blue darken-1" class="mr-1"
+                            title="Follow us on Twitter">
+                            <v-icon large>mdi-twitter</v-icon>
+                        </v-btn>
+                        <v-btn icon href="https://wa.me/your-number" target="_blank" color="green darken-2" class="mr-1"
+                            title="Chat with us on WhatsApp">
+                            <v-icon large>mdi-whatsapp</v-icon>
+                        </v-btn>
+                    </v-row>
+                </CustomCard>
+
+
+
+
+                <CustomCard title="Bersatu Membangun" class="mb-5">
+
+                    <Ads src="https://metrobalim.net/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-11-at-05.21.46_0b833506-768x922.jpg"
+                        alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80 }"
+                        @click="handleImageAdClick" />
+
+                </CustomCard>
+
+
             </v-col>
         </v-row>
+
+
     </v-container>
     <v-container fluid class="bg-greyDarken4">
         <videoComponent />
@@ -172,6 +170,8 @@ import videoComponent from "@/components/video.vue";
 import Ads from "~/components/Ads.vue";
 import headlinesComponent from "@/components/headlines.vue";
 import { useRouter } from "vue-router";
+import CustomCard from "@/components/CustomCard.vue";
+
 
 const router = useRouter();
 

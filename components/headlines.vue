@@ -1,9 +1,8 @@
 <template>
     <v-container>
-        <v-row align="stretch" class="content-container">
-            <v-col md="6" sm="12" lg="6" class="content-col">
-                <v-skeleton-loader v-if="loading" type="image, card-avatar, article" />
-                <v-card v-else class="h-100 d-flex flex-column content-card article-card">
+        <CustomCard title="Headline" @refresh="fetchArticles">
+            <v-row>
+                <v-col md="6" sm="12" lg="6" class="content-col">
                     <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
                         <NuxtLink @click.prevent="openArticle(articles[0])" class="article-link">
                             <NuxtImg preset="headlineMain" :src="articles[0]?.image || 'default-image.jpg'"
@@ -26,34 +25,23 @@
                             {{ articles[0]?.like || 0 }}
                         </v-btn>
                     </v-card-actions>
-                </v-card>
-            </v-col>
-            <v-col md="6" sm="12" lg="6" class="content-col">
-                <v-row dense align="stretch">
-                    <v-col cols="12" md="12" v-if="loading">
-                        <v-row v-for="i in 3">
-                            <v-col cols="6">
-                                <v-skeleton-loader type="article" />
-                            </v-col>
-                            <v-col cols="6">
-                                <v-skeleton-loader type="image" />
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                    <v-col v-else v-for="(article, index) in articles.slice(1, 4)" :key="article?.title || index"
-                        cols="12">
-                        <v-card class="h-100 d-flex flex-column content-card article-card">
+                </v-col>
+
+                <v-col md="6" sm="12" lg="6" class="content-col">
+                    <v-row dense align="stretch">
+                        <v-col v-for="(article, index) in articles.slice(1, 4)" :key="article?.title || index"
+                            cols="12">
                             <v-row no-gutters class="h-100">
                                 <v-col cols="12" md="6" class="d-flex flex-column">
                                     <v-card-title class="truncated-title text-h6">
-                                        <NuxtLink @click.prevent="openArticle(articles[index])" class="article-link">
+                                        <NuxtLink @click.prevent="openArticle(article)" class="article-link">
                                             {{ article.title }}
                                         </NuxtLink>
                                     </v-card-title>
                                 </v-col>
                                 <v-col cols="12" md="6" class="d-flex flex-column">
                                     <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
-                                        <NuxtLink @click.prevent="openArticle(articles[index])" class="article-link">
+                                        <NuxtLink @click.prevent="openArticle(article)" class="article-link">
                                             <NuxtImg preset="headlineMain" :src="article?.image || 'default-image.jpg'"
                                                 class="w-100 h-100" placeholder="blur" loading="lazy" format="webp"
                                                 fit="cover" style="object-fit: cover;" />
@@ -73,18 +61,19 @@
                                     </v-card-actions>
                                 </v-col>
                             </v-row>
-                        </v-card>
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
+                            <v-divider></v-divider>
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
+        </CustomCard>
     </v-container>
 </template>
-<script setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-// import { getArticleLink } from '@/server/mockData/article'; // Sesuaikan dengan path file articles.ts
 
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import CustomCard from "@/components/CustomCard.vue";
 
 const router = useRouter();
 const loading = ref(true);
@@ -94,27 +83,17 @@ if (articlesPending) {
     loading.value = false;
 }
 
-const openArticle = (value) => {
-    // getArticleLink(value);
-    router.push(`/article/${value.category}/${value.slug}`);
+const openArticle = (article) => {
+    router.push(`/article/${article.category}/${article.slug}`);
 };
 </script>
 
 <style scoped>
-/* Container utama */
-.content-container {
-    max-height: 600px;
-    min-height: 70vh;
-    overflow: hidden;
-}
-
-/* Menyesuaikan tinggi agar seragam */
 .content-col {
     display: flex;
     flex-direction: column;
 }
 
-/* Efek hover untuk kartu artikel */
 .article-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -124,31 +103,22 @@ const openArticle = (value) => {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Batasi panjang judul */
 .truncated-title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    line-clamp: 3;
     -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
 }
 
-/* Efek hover untuk link judul artikel */
-
-
-/* Efek hover untuk gambar artikel */
 .article-link {
     cursor: pointer;
     color: inherit;
-    /* Menggunakan warna teks dari parent */
     text-decoration: none;
-    /* Menghilangkan garis bawah */
 }
 
 .article-link:hover {
     color: #1976D2;
-    /* Warna biru Vuetify saat hover */
 }
 </style>

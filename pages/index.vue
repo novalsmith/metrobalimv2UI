@@ -3,19 +3,24 @@
 
     <v-container>
         <v-row>
-            <v-col cols="12" md="4">
+            <v-col cols="4" md="4">
                 <v-icon size="35" class="mr-2">mdi-cloud</v-icon>
                 <span class="text-h6">Selamat Malam <br> <small>Selasa, 11 Maret 2025</small> </span>
 
             </v-col>
+            <v-col cols="4" md="4" offset="4" align="end">
+                <v-icon size="35" class="mr-2">mdi-language</v-icon>
+                <span class="text-h6">Language <br> <small>Selasa, 11 Maret 2025</small> </span>
+
+            </v-col>
 
         </v-row>
-    </v-container>
 
 
-    <!-- ads -->
-    <!-- <adsComponent /> -->
-    <v-container>
+
+        <!-- ads -->
+        <!-- <adsComponent /> -->
+
         <v-row>
             <v-col cols="8">
                 <v-row>

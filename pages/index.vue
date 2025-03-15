@@ -4,13 +4,13 @@
     <v-container>
         <v-row>
             <v-col cols="4" md="4">
-                <v-icon size="35" class="mr-2">mdi-cloud</v-icon>
-                <span class="text-h6">Selamat Malam <br> <small>Selasa, 11 Maret 2025</small> </span>
+                <v-icon size="35" class="mr-2">mdi-cloud-outline</v-icon>
+                <span class="text-subtitle-1">Selamat Malam <br> <small>Selasa, 11 Maret 2025</small> </span>
 
             </v-col>
             <v-col cols="4" md="4" offset="4" align="end">
                 <v-icon size="35" class="mr-2">mdi-language</v-icon>
-                <span class="text-h6">Language <br> <small>Selasa, 11 Maret 2025</small> </span>
+                <span class="text-subtitle-1">Language <br> <small>Selasa, 11 Maret 2025</small> </span>
 
             </v-col>
 
@@ -66,7 +66,8 @@
                 <v-row>
                     <v-col cols="12">
                         <CustomCard title="Trending">
-                            <v-chip v-for="tag in tags" :key="tag" class="rounded my-1 mx-1" :text="tag"></v-chip>
+                            <v-chip variant="outlined" :to="tag" v-for="tag in tags" :key="tag"
+                                class="rounded my-1 mx-1" :text="tag"></v-chip>
                         </CustomCard>
 
                     </v-col>
@@ -100,13 +101,18 @@
                     </v-col>
                     <v-col cols="12">
 
-                        <CustomCard title="Topik Populer" class="mb-5">
+                        <CustomCard title="Topik Populer">
                             <v-list>
-                                <v-list-item class="truncated-title" v-for="(article, index) in articles.slice(0, 5)"
+                                <v-list-item class="text-wrap mb-1" v-for="(article, index) in articles.slice(0, 5)"
                                     :key="index">
-                                    <NuxtLink to="/" class="article-link">
-                                        {{ index + 1 }}. {{ articles[index]?.title }}
+                                    <NuxtLink to="/" class="article-link text-subtitle-2">
+                                        <!-- <span class="text-h6">{{ index + 1 }}</span>  -->
+                                        <v-chip>
+                                            {{ index + 1 }}
+                                        </v-chip>
+                                        {{ articles[index]?.title }}
                                     </NuxtLink>
+                                    <v-divider></v-divider>
                                 </v-list-item>
                             </v-list>
                         </CustomCard>
@@ -116,7 +122,8 @@
             </v-col>
             <v-col cols="12">
                 <v-card>
-                    <CustomCard title="Sorotan" color="toolbar">
+                    <CustomCard title="Sorotan"
+                        :style="{ background: $vuetify.theme.current.colors.secondaryGradient }">
                         <v-row align="center" no-gutters>
                             <v-col v-for="(item, index) in articles.slice(3, 9)" :key="index" cols="4">
                                 <v-row no-gutters>
@@ -164,7 +171,7 @@
                                                 </v-responsive>
                                             </v-col>
                                             <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
-                                                <v-card-title class="text-h6 text-wrap">
+                                                <v-card-title class="text-subtitle-1 text-wrap">
                                                     <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
                                                         class="article-link">
                                                         {{ item.title }}

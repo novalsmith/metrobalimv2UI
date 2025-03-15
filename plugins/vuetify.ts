@@ -25,11 +25,15 @@ export default defineNuxtPlugin((app) => {
       info: '#2196F3',
       success: '#4CAF50',
       warning: '#FB8C00',
-      toolbar: '#212121', // grey-darken-4
-      subToolbar: '#424242', // grey-darken-3
+      toolbar: '#E3F2FD', // grey-darken-4
+      subToolbar: '#FFFFFF', // grey-darken-3
+      activedToolbar: '#1976D2', // grey-darken-3
       sidebar: '#424242', // grey-darken-3
       greyDarken4: '#212121', // grey-darken-4
       greyDarken3: '#424242', // grey-darken-3
+      primaryGradient: 'linear-gradient(to right,rgb(236, 255, 229),rgb(157, 227, 255))',
+      secondaryGradient: 'linear-gradient(to right,rgb(255, 255, 255),rgb(164, 222, 255))',
+      iconColor: 'var(--icon-color)',
     },
     variables: {
       'border-color': '#000000',
@@ -50,6 +54,8 @@ export default defineNuxtPlugin((app) => {
       'theme-on-code': '#000000',
       'link-color': 'inherit', // Warna link default
       'link-hover-color': '#1976D2', // Warna link saat hover
+      'icon-color': '#E65100',
+
     },
   };
 
@@ -68,11 +74,14 @@ export default defineNuxtPlugin((app) => {
       warning: '#FFB74D',
       onSurface: '#FFFFFF', // Warna teks untuk surface
       onBackground: '#FFFFFF', // Warna teks untuk background
-      toolbar: '#424242', // grey-darken-4
-      subToolbar: '#616161', // grey-darken-3
+      toolbar: '#000000', // grey-darken-4
+      subToolbar: '#000000', // grey-darken-3
       sidebar: '#424242', // grey-darken-3
       greyDarken4: '#424242', // grey-darken-4
       greyDarken3: '#616161', // grey-darken-3
+      iconColor: 'var(--icon-color)',
+      secondaryGradient: 'linear-gradient(to right,rgb(0, 0, 0),rgb(1, 67, 89))',
+
     },
     variables: {
       'text-field-bg-color': '#303030',
@@ -81,6 +90,8 @@ export default defineNuxtPlugin((app) => {
       'text-field-color': '#FFFFFF',
       'link-color': 'inherit',
       'link-hover-color': '#64B5F6',
+      'icon-color': '#BDBDBD',
+
     },
   };
 
@@ -93,7 +104,7 @@ export default defineNuxtPlugin((app) => {
       },
       VContainer: {
         fluid: false, // Atur default fluid ke false
-        style: 'max-width: 1350px; margin: 0 auto;', // Atur lebar maksimum dan margin
+        style: 'max-width: 90%; margin: 0 auto; padding: 16px;', // Menambahkan padding
       },
       VTextField: {
         variant: 'outlined', // Atur default variant text field
@@ -103,6 +114,9 @@ export default defineNuxtPlugin((app) => {
       },
       VCard: {
         rounded: 'xl', // Atur default button rounded
+      },
+      VIcon:{
+        color: 'var(--icon-color)',
       },
       typography: { // Tambahkan typography di dalam theme
         defaultFontFamily: 'Roboto, sans-serif',
@@ -123,6 +137,7 @@ export default defineNuxtPlugin((app) => {
         mdi,
       },
     },
+  
     ssr: true,
     blueprint: md3,
     theme: {
@@ -135,7 +150,7 @@ export default defineNuxtPlugin((app) => {
     },
     
     display: {
-      mobileBreakpoint: 'sm', // Mengatur mobile breakpoint
+      mobileBreakpoint: 'md', // Mengatur mobile breakpoint
     },
   });
 

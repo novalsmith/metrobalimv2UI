@@ -1,6 +1,6 @@
 <template>
-    <v-app>
-        <v-toolbar elevation="1" color="white">
+    <v-app >
+        <v-toolbar elevation="1" :style="{ background: $vuetify.theme.current.colors.secondaryGradient } ">
             <template v-slot:prepend>
                 <v-app-bar-nav-icon @click="toggleMenu"></v-app-bar-nav-icon>
                 <NuxtLink to="/">
@@ -13,7 +13,7 @@
 
                 <v-btn v-for="menu in menus" :key="menu.categoryId" variant="text" rounded="false" :to="menu.link"
                     :active="isMenuActive(menu.categoryId)" exact>
-                    <v-icon color="grey-darken-1" class="mr-1" size="27">{{ menu.icon }}</v-icon>
+                    <VIcon class="mr-1" size="25" :icon="menu.icon" />
                     {{ menu.title }}
                 </v-btn>
 
@@ -25,7 +25,7 @@
             <v-btn icon small @click="handleProfile"><v-icon>mdi-account-circle-outline</v-icon></v-btn>
             <v-btn icon="mdi-dots-vertical"></v-btn>
         </v-toolbar>
-        <v-toolbar v-if="subMenuToolbarVisible" color="transparent" elevation="1">
+        <v-toolbar density="compact" v-if="subMenuToolbarVisible" color="subToolbar" elevation="1">
             <v-toolbar-items style="display: flex; justify-content: center; width: 100%;">
                 <v-btn v-for="subMenu in selectedSubMenu.subMenu" :key="subMenu.categoryId" variant="text"
                     rounded="false" :to="subMenu.link" exact :active="isSubMenuActive(subMenu.categoryId)">

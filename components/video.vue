@@ -1,5 +1,4 @@
 <template>
-    <!-- <v-container> -->
     <!-- <div class="text-h5 mb-4 d-flex align-center">
             <v-icon class="mr-2">mdi-video</v-icon> Live Update
         </div> -->
@@ -51,7 +50,6 @@
 
         </v-col>
     </v-row>
-    <!-- </v-container> -->
 </template>
 
 <script setup>

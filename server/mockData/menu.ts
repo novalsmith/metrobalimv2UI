@@ -18,10 +18,10 @@ interface Menu {
 }
 
 const menus: Menu[] = [
-  { title: "Home", icon: "mdi-home", categoryId: "/", link: "/", subMenu:[] },
+  { title: "Home", icon: "mdi-home-outline", categoryId: "/", link: "/", subMenu:[] },
   {
     title: "Tanah Papua",
-    icon: "mdi-heart",
+    icon: "mdi-heart-outline",
     color: "red",
     categoryId: "tanah-papua",
     link: "/tanah-papua",
@@ -40,10 +40,10 @@ const menus: Menu[] = [
       ] },
     ],
   },
-  { title: "Nasional", icon: "mdi-earth", color: "green", categoryId: "regional", link: "/regional",subMenu:[] },
+  { title: "Nasional", icon: "mdi-earth-outline", color: "green", categoryId: "regional", link: "/regional",subMenu:[] },
   {
     title: "Internasional",
-    icon: "mdi-web",
+    icon: "mdi-web-outline",
     color: "red",
     categoryId: "internasional",
     link: "/internasional",
@@ -52,7 +52,7 @@ const menus: Menu[] = [
   },
   {
     title: "Insight",
-    icon: "mdi-lightbulb-on",
+    icon: "mdi-lightbulb-on-outline",
     color: "yellow",
     categoryId: "insight",
     link: "/insight",

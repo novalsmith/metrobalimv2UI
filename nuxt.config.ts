@@ -4,7 +4,9 @@ export default defineNuxtConfig({
   ssr:false,
   compatibilityDate: '2025-01-01',
    css: [
-    '~/assets/css/main.css' // Import SCSS Global
+    '~/assets/css/main.css', // Import SCSS Global,
+    '~/assets/globals.scss' // Import SCSS Global
+
   ],
   build: {
     transpile: ['vuetify'],

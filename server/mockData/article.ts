@@ -6,6 +6,8 @@ interface Article {
     like: number;
     slug: string;
     category: string;
+    prependAvatar: string;
+
   }
   
   const articles: Article[] = [
@@ -16,8 +18,10 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "ole-naturalisasi-indonesia",
-        category: "sastra"
-    },
+        category: "sastra",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
+     },
     {
         title: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
         subtitle: "Velixs Wangai Pemprov Papua Pegunungan Usulkan Penyesuaian Passing Grade CPNS ke Kemen PANRB.",
@@ -25,7 +29,9 @@ interface Article {
         isLike: true,
         like: 5,
         slug: "veliks-wangai-pemprov",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
@@ -34,7 +40,9 @@ interface Article {
         isLike: true,
         like: 5,
         slug: "polda-papua",
-        category: "regional"
+        category: "regional",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
 
     {
@@ -44,7 +52,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "warga-indonesia",
-        category: "bisnis"
+        category: "bisnis",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
 
     {
@@ -54,7 +64,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "podcast"
+        category: "podcast",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "ULMWP Salurkan Bantuan untuk Pengungsi di Nduga, Papua Pegunungan",
@@ -63,7 +75,9 @@ interface Article {
         isLike: true,
         like: 50,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Pemberhentian Pegawai Honorer di Papua Pegunungan Picu Protes",
@@ -72,7 +86,9 @@ interface Article {
         isLike: false,
         like: 0,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Refleksi Perjalanan Tahun 2024 : Membangun Fondasi dan Identitas Pegunungan Papua",
@@ -81,7 +97,9 @@ interface Article {
         isLike: false,
         like: 0,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Sidang Paripurna DPD RI Nelson Wenda Laporkan Persoalan dan Isu Strategis Di Provinsi Papua Pegunungan",
@@ -90,7 +108,9 @@ interface Article {
         isLike: false,
         like: 0,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "DOA di Getsemani",
@@ -99,7 +119,9 @@ interface Article {
         isLike: false,
         like: 30,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
@@ -108,7 +130,9 @@ interface Article {
         isLike: true,
         like: 5,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
@@ -117,7 +141,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
@@ -126,7 +152,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
 
     {
@@ -136,7 +164,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Resmi, Ole Romeny Menjadi Warga Negara Indonesia. Lini serang Timnas indonesia semakin tajam dan diharapkan bisa mendapat poin maksimal",
@@ -145,7 +175,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
     {
         title: "Warga Distrik Kroptak Nduga Minta Penarikan TNI Non-Organik dari Wilayah Mereka.",
@@ -154,7 +186,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
 
     {
@@ -164,7 +198,9 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua"
+        category: "tanah-papua",
+        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+
     },
   ];
   

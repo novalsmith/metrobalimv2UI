@@ -1,20 +1,22 @@
 <template>
     <v-app>
-        <v-toolbar color="toolbar">
+        <v-toolbar elevation="1" color="white">
             <template v-slot:prepend>
                 <v-app-bar-nav-icon @click="toggleMenu"></v-app-bar-nav-icon>
-                <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80, width: 200 }"
-                    @click="handleClickImg" class="mr-5" />
+                <NuxtLink to="/">
+                    <Ads :src="imgLogo" alt="Iklan Metro Bali" :modifiers="{ format: 'webp', quality: 80, width: 200 }"
+                        class="mr-5" />
+                </NuxtLink>
             </template>
             <v-spacer></v-spacer>
             <v-toolbar-items v-if="!isSmallScreen">
-                <v-btn v-for="(menu, i) in menus" :key="i" :to="menu.categoryId" slim variant="text" rounded="false"
-                    :active="activeMenu != null && activeMenu.categoryId === menu.categoryId ? true : false"
-                    @click="menu.subMenu ? showSubMenuToolbar(menu) : hideSubMenuToolbar()">
-                    <v-icon class="mr-1" size="27">{{ menu.icon }}</v-icon>
-                    {{ menu.title }}
 
+                <v-btn v-for="menu in menus" :key="menu.categoryId" variant="text" rounded="false" :to="menu.link"
+                    :active="isMenuActive(menu.categoryId)" exact>
+                    <v-icon color="grey-darken-1" class="mr-1" size="27">{{ menu.icon }}</v-icon>
+                    {{ menu.title }}
                 </v-btn>
+
             </v-toolbar-items>
             <v-spacer></v-spacer>
             <v-divider class="mx-2" vertical></v-divider>
@@ -23,22 +25,13 @@
             <v-btn icon small @click="handleProfile"><v-icon>mdi-account-circle-outline</v-icon></v-btn>
             <v-btn icon="mdi-dots-vertical"></v-btn>
         </v-toolbar>
-
-        <v-toolbar v-if="!isSmallScreen && subMenuToolbarVisible" elevation="1" color="subToolbar">
-            <v-container fluid>
-                <v-row justify="center">
-                    <v-col cols="auto">
-                        <v-toolbar-items variant="text">
-                            <v-btn v-for="(subMenu, j) in selectedSubMenu.subMenu" :key="j" :to="subMenu.categoryId"
-                                slim variant="text" rounded="false" @click="navigate(subMenu)">
-                                <v-icon class="mr-1" size="27" :color="subMenu.color">{{ subMenu.icon }}</v-icon>
-                                {{ subMenu.title }}
-                            </v-btn>
-                        </v-toolbar-items>
-                    </v-col>
-                </v-row>
-            </v-container>
-
+        <v-toolbar v-if="subMenuToolbarVisible" color="transparent" elevation="1">
+            <v-toolbar-items style="display: flex; justify-content: center; width: 100%;">
+                <v-btn v-for="subMenu in selectedSubMenu.subMenu" :key="subMenu.categoryId" variant="text"
+                    rounded="false" :to="subMenu.link" exact :active="isSubMenuActive(subMenu.categoryId)">
+                    {{ subMenu.title }}
+                </v-btn>
+            </v-toolbar-items>
         </v-toolbar>
 
         <v-main>
@@ -48,145 +41,76 @@
         </v-main>
         <ArticleDetailDialog ref="articleDialog" />
 
-        <v-footer><v-col class="text-center py-3"><span>&copy; 2025 Metrobalim. All Rights
-                    Reserved.</span></v-col></v-footer>
-        <v-navigation-drawer v-model="sideMenu" temporary location="left" color="sidebar" :width="drawerWidth">
-            <v-container>
-                <v-text-field label="Search" prepend-inner-icon="mdi-magnify" class="mb-4"></v-text-field>
-                <v-list dense>
-                    <v-list-item v-for="(menu, i) in menus" :key="i" @click="handleMenuItemClick(menu)">
-                        <template v-if="menu.subMenu">
-                            <v-list-group :value="activeMenu === menu">
-                                <template v-slot:activator="{ props }">
-                                    <v-list-item v-bind="props">
-                                        <v-list-item-title>{{ menu.title }}</v-list-item-title>
-                                    </v-list-item>
-                                </template>
-                                <v-list-item v-for="(subMenu, j) in menu.subMenu" :key="j" @click="navigate(subMenu)"
-                                    dense>
-                                    <v-list-item-title class="text-truncate">{{ subMenu.title }}</v-list-item-title>
-                                </v-list-item>
-                            </v-list-group>
-                        </template>
-                        <template v-else>
-                            <v-list-item @click="navigate(menu)">
-                                <v-list-item-title>{{ menu.title }}</v-list-item-title>
-                            </v-list-item>
-                        </template>
-                    </v-list-item>
-                </v-list>
-                <v-divider class="my-4"></v-divider>
-                <v-list dense>
-                    <v-list-item>
-                        <v-list-item-title>Dark Theme</v-list-item-title>
-                        <template v-slot:append>
-                            <v-switch v-model="theme.global.name.value" inset :true-value="'dark'"
-                                :false-value="'light'"></v-switch>
-                        </template>
-                    </v-list-item>
-                    <v-list-item @click="handleProfile">
-                        <v-list-item-title>Profile</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-list-item-title>Settings</v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-container>
-        </v-navigation-drawer>
+        <v-footer>
+            <v-col class="text-center py-3">
+                <span>&copy; 2025 Metrobalim. All Rights Reserved.</span>
+            </v-col>
+        </v-footer>
     </v-app>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useTheme, useDisplay } from 'vuetify';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+
 import ArticleDetailDialog from "@/components/core/articleDetailDialog.vue";
 import Ads from "~/components/Ads.vue";
 
 const route = useRoute();
+const router = useRouter();
 const articleDialog = ref(null);
 defineExpose({ articleDialog });
 
 const theme = useTheme();
 const isLoading = ref(true);
-const sideMenu = ref(false);
 const imgLogo = "/images/metrobalimlogo.webp";
 const activeMenu = ref(null);
 const subMenuToolbarVisible = ref(false);
 const selectedSubMenu = ref({});
 
+const { data: menus } = await useFetch('/api/mockMenu');
+
+
+// Defined all function here
+
+const hideShowSubMenu = () => {
+    const foundMenu = menus.value.find(menu => menu.link === route.path || menu.categoryId === route.params.category);
+    console.log(foundMenu);
+    if (foundMenu && foundMenu.subMenu.length > 0) {
+        subMenuToolbarVisible.value = true;
+        selectedSubMenu.value = foundMenu;
+    } else {
+        subMenuToolbarVisible.value = false;
+        selectedSubMenu.value = {};
+    }
+};
+
+// on load
+onMounted(() => {
+    isLoading.value = false;
+    hideShowSubMenu();
+});
+
+// wach and listen every changes
+watch(() => {
+    hideShowSubMenu();
+});
+
+
+
+const isMenuActive = (menu) => route.params.category == menu || route.path == menu; // Checking home path as well
+const isSubMenuActive = (menu) => route.params.subCategory == menu;
+const toggleMenu = () => sideMenu.value = !sideMenu.value;
+
+const handleSearch = () => console.log("do handleSearch");
+const handleProfile = () => console.log("do handleProfile");
 const toggleTheme = () => {
     theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
 };
 
-const menuIcon = computed(() => (sideMenu.value ? 'mdi-close' : 'mdi-menu'));
 const currentThemeIcon = computed(() => theme.global.current.value.dark ? 'mdi-weather-night' : 'mdi-brightness-7');
 
-const { data: menus, pending: menusPending } = await useFetch('/api/mockMenu');
-
-const parseValue = (value) => {
-    const currentPath = value.split("/");
-};
-
-onMounted(() => {
-    isLoading.value = false;
-    const currentPath = route.path.split("/");
-    const foundMenu = menus.value.find(menu => {
-        return menu.categoryId != "/";
-    });
-    if (foundMenu && foundMenu.subMenu) {
-        showSubMenuToolbar(foundMenu);
-    } else if (foundMenu) {
-        activeMenu.value = foundMenu;
-    }
-});
-
-
-const toggleMenu = () => {
-    sideMenu.value = !sideMenu.value;
-};
-
-const navigate = (menu) => {
-    sideMenu.value = false;
-    // subMenuToolbarVisible.value = false;
-    activeMenu.value = menus.value.find(mainMenu => mainMenu.subMenu && mainMenu.subMenu.some(sub => sub.categoryId === menu.categoryId)) || menus.value.find(mainMenu => mainMenu.categoryId === menu.categoryId) || null;
-};
-
-const handleSearch = () => {
-    alert("search");
-};
-
-const handleClickImg = () => {
-    route
-};
-
-const handleProfile = () => {
-    alert("profile");
-};
-
-const showSubMenuToolbar = (menu) => {
-    if (menu.subMenu) {
-        subMenuToolbarVisible.value = true;
-        selectedSubMenu.value = menu;
-        activeMenu.value = menu;
-    }
-};
-
-const hideSubMenuToolbar = () => {
-    subMenuToolbarVisible.value = false;
-    selectedSubMenu.value = {};
-    activeMenu.value = null;
-};
-
-// Breakpoint and Responsive Logic
 const { smAndDown } = useDisplay();
 const isSmallScreen = computed(() => smAndDown.value);
-const drawerWidth = computed(() => isSmallScreen.value ? '90%' : '300');
 </script>
-
-
-<style scoped>
-.text-right {
-    text-align: right;
-}
-</style>

@@ -1,59 +1,72 @@
 interface SubMenu {
-    title: string;
-    icon: string;
-    categoryId: string;
-    color?: string; // Color is optional and a string
-  }
+  title: string;
+  icon: string;
+  categoryId: string;
+  link: string;  
+  color?: string;
+  subMenu?: SubMenu[];
+}
+
+interface Menu {
+  title: string;
+  icon: string;
+  categoryId: string;
+  link: string;  
+  color?: string;
+  subMenu?: SubMenu[];
+  badge?: string;
+}
+
+const menus: Menu[] = [
+  { title: "Home", icon: "mdi-home", categoryId: "/", link: "/", subMenu:[] },
+  {
+    title: "Tanah Papua",
+    icon: "mdi-heart",
+    color: "red",
+    categoryId: "tanah-papua",
+    link: "/tanah-papua",
+    subMenu: [
+      { title: "Papua", icon: "mdi-earth", categoryId: "papua", link: "/tanah-papua/papua",subMenu:[
   
-  interface Menu {
-    title: string;
-    icon: string;
-    categoryId: string;
-    color?: string; // Color is optional and a string
-    subMenu?: SubMenu[]; // SubMenu is optional and an array of SubMenu
-    badge?:string; //badge is optional and a string
-  }
-  
-  const menus: Menu[] = [
-    { title: "Home", icon: "mdi-home", categoryId: "/" },
-    {
-      title: "Tanah Papua",
-      icon: "mdi-heart",
-      color: "red",
-      categoryId: "/tanah-papua",
-      subMenu: [
-        { title: "Papua", icon: "mdi-earth", categoryId: "/tanah-papua/papua" },
-        { title: "Papua Tengah", icon: "mdi-earth", categoryId: "/tanah-papua/papua-tengah" },
-        { title: "Papua Pegunungan", icon: "mdi-earth", categoryId: "/tanah-papua/papua-pegunungan" },
-        { title: "Papua Selatan", icon: "mdi-earth", categoryId: "/tanah-papua/papua-selatan" },
-        { title: "Papua Barat", icon: "mdi-earth", categoryId: "/tanah-papua/papua-barat" },
-        { title: "Papua Barat Daya", icon: "mdi-earth", categoryId: "/tanah-papua/papua-barat-daya" },
-      ],
-    },
-    { title: "Nasional", icon: "mdi-earth", color: "green", categoryId: "/regional" },
-    {
-      title: "Internasional",
-      icon: "mdi-web",
-      color: "red",
-      categoryId: "/internasional",
-      badge: "NEW",
-    },
-    {
-      title: "Insight",
-      icon: "mdi-lightbulb-on",
-      color: "yellow",
-      categoryId: "/insight",
-      subMenu: [
-        { title: "Podcast", icon: "mdi-podcast", categoryId: "/podcast" },
-        { title: "Jurnal", icon: "mdi-newspaper", categoryId: "/jurnal" },
-        { title: "Sastra", icon: "mdi-book-open-page-variant", categoryId: "/sastra" },
-        { title: "Bisnis", icon: "mdi-chart-bar", categoryId: "/bisnis" },
-        { title: "HIV-AIDS", icon: "mdi-ribbon", categoryId: "/hiv-aids" },
-        { title: "Kesehatan", icon: "mdi-doctor", categoryId: "/video" },
-        { title: "Pendidikan", icon: "mdi-book-open", categoryId: "/video" },
-        { title: "Sport", icon: "mdi-book-open", categoryId: "/video" },
-      ],
-    },
-  ];
-  
-  export default menus;
+
+      ] },
+      { title: "Papua Tengah", icon: "mdi-earth", categoryId: "papua-tengah", link: "/tanah-papua/papua-tengah",subMenu:[] },
+      { title: "Papua Pegunungan", icon: "mdi-earth", categoryId: "papua-pegunungan", link: "/tanah-papua/papua-pegunungan" ,subMenu:[]},
+      { title: "Papua Selatan", icon: "mdi-earth", categoryId: "papua-selatan", link: "/tanah-papua/papua-selatan",subMenu:[] },
+      { title: "Papua Barat", icon: "mdi-earth", categoryId: "papua-barat", link: "/tanah-papua/papua-barat" ,subMenu:[]},
+      { title: "Papua Barat Daya", icon: "mdi-earth", categoryId: "papua-barat-daya", link: "/tanah-papua/papua-barat-daya",subMenu:[
+        { title: "Sorong", icon: "mdi-earth", categoryId: "papua", link: "/tanah-papua/papua/sorong",subMenu:[] },
+        { title: "Maybrat", icon: "mdi-earth", categoryId: "papua", link: "/tanah-papua/papua/maybrat",subMenu:[] },
+      ] },
+    ],
+  },
+  { title: "Nasional", icon: "mdi-earth", color: "green", categoryId: "regional", link: "/regional",subMenu:[] },
+  {
+    title: "Internasional",
+    icon: "mdi-web",
+    color: "red",
+    categoryId: "internasional",
+    link: "/internasional",
+    badge: "NEW",
+     subMenu:[]
+  },
+  {
+    title: "Insight",
+    icon: "mdi-lightbulb-on",
+    color: "yellow",
+    categoryId: "insight",
+    link: "/insight",
+    subMenu: [
+      { title: "Podcast", icon: "mdi-podcast", categoryId: "podcast", link: "/insight/podcast",subMenu:[] },
+      { title: "Jurnal", icon: "mdi-newspaper", categoryId: "jurnal", link: "/insight/jurnal" },
+      { title: "Sastra", icon: "mdi-book-open-page-variant", categoryId: "sastra", link: "/insight/sastra",subMenu:[] },
+      { title: "Bisnis", icon: "mdi-chart-bar", categoryId: "bisnis", link: "/insight/bisnis",subMenu:[] },
+      { title: "HIV-AIDS", icon: "mdi-ribbon", categoryId: "hiv-aids", link: "/insight/hiv-aids",subMenu:[] },
+      { title: "Kesehatan", icon: "mdi-doctor", categoryId: "health", link: "/insight/health" ,subMenu:[]},
+      { title: "Pendidikan", icon: "mdi-book-open", categoryId: "study", link: "/insight/study",subMenu:[] },
+      { title: "Sport", icon: "mdi-book-open", categoryId: "sport", link: "/insight/sport",subMenu:[] },
+    ],
+  },
+];
+
+export default menus;

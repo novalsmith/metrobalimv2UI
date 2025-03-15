@@ -2,9 +2,8 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   ssr:false,
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-  css: [
+  compatibilityDate: '2025-01-01',
+   css: [
     '~/assets/css/main.css' // Import SCSS Global
   ],
   build: {

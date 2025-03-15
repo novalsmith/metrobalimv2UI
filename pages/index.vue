@@ -124,7 +124,7 @@
                                         <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
                                             <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
                                                 <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
-                                                    class="w-100 h-100" placeholder="blur" loading="lazy" format="webp"
+                                                    class="w-100 h-100" placeholder="blur" loading="eager" format="webp"
                                                     fit="cover" style="object-fit: cover;" />
                                             </NuxtLink>
                                         </v-responsive>
@@ -158,7 +158,7 @@
                                                     <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
                                                         <NuxtImg preset="article"
                                                             :src="item?.image || 'default-image.jpg'"
-                                                            class="w-100 h-100" placeholder="blur" loading="lazy"
+                                                            class="w-100 h-100" placeholder="blur" loading="eager"
                                                             format="webp" fit="cover" style="object-fit: cover;" />
                                                     </NuxtLink>
                                                 </v-responsive>

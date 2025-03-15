@@ -13,7 +13,7 @@
                     <v-row>
                         <v-col cols="4">
                             <v-img height="80" :lazy-src="video.image" class="video-thumbnail article-image">
-                                <NuxtImg v-if="video.image" loading="lazy" placeholder :src="video.image" />
+                                <NuxtImg v-if="video.image" loading="eager" placeholder :src="video.image" />
                                 <div class="overlay-small">
                                     <v-icon class="play-icon" color="white">mdi-play-circle-outline</v-icon>
                                 </div>

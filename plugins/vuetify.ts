@@ -93,7 +93,7 @@ export default defineNuxtPlugin((app) => {
       },
       VContainer: {
         fluid: false, // Atur default fluid ke false
-        style: 'max-width: 1700px; margin: 0 auto;', // Atur lebar maksimum dan margin
+        style: 'max-width: 1350px; margin: 0 auto;', // Atur lebar maksimum dan margin
       },
       VTextField: {
         variant: 'outlined', // Atur default variant text field

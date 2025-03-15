@@ -52,7 +52,6 @@ watch(() => props.src, (newSrc, oldSrc) => {
 const isMounted = ref(false);
 onMounted(() => {
     isMounted.value = true;
-    console.log("🔹 Props yang diterima di nvimg.vue:", props);
 
 });
 </script>

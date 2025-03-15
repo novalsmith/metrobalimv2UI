@@ -5,7 +5,7 @@
                 <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
                     <NuxtLink @click.prevent="openArticle(articles[0])" class="article-link">
                         <NuxtImg preset="headlineMain" :src="articles[0]?.image || 'default-image.jpg'"
-                            class="w-100 h-100" placeholder="blur" loading="lazy" format="webp" fit="cover"
+                            class="w-100 h-100" placeholder="blur" loading="eager" format="webp" fit="cover"
                             style="object-fit: cover; min-height: 100%;" />
                     </NuxtLink>
                 </v-responsive>
@@ -41,7 +41,7 @@
                                 <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
                                     <NuxtLink @click.prevent="openArticle(article)" class="article-link">
                                         <NuxtImg preset="headlineMain" :src="article?.image || 'default-image.jpg'"
-                                            class="w-100 h-100" placeholder="blur" loading="lazy" format="webp"
+                                            class="w-100 h-100" placeholder="blur" loading="eager" format="webp"
                                             fit="cover" style="object-fit: cover;" />
                                     </NuxtLink>
                                 </v-responsive>

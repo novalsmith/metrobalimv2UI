@@ -40,10 +40,10 @@ const menus: Menu[] = [
       ] },
     ],
   },
-  { title: "Nasional", icon: "mdi-earth-outline", color: "green", categoryId: "regional", link: "/regional",subMenu:[] },
+  { title: "Nasional", icon: "mdi-earth", color: "green", categoryId: "nasional", link: "/nasional",subMenu:[] },
   {
     title: "Internasional",
-    icon: "mdi-web-outline",
+    icon: "mdi-web",
     color: "red",
     categoryId: "internasional",
     link: "/internasional",

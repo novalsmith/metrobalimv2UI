@@ -5,9 +5,15 @@ interface Article {
     isLike: boolean;
     like: number;
     slug: string;
-    category: string;
+    category: Category|null;
     prependAvatar: string;
+  }
 
+  interface Category {
+    categoryId: string;
+    name: string;
+    parentId: string | null;
+    parentName: string | null;
   }
   
   const articles: Article[] = [
@@ -18,7 +24,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "ole-naturalisasi-indonesia",
-        category: "sastra",
+        category:{
+            categoryId:"nasional",
+            name:"Nasional",
+            parentId:null,
+            parentName:null
+        },
         prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
      },
@@ -29,10 +40,14 @@ interface Article {
         isLike: true,
         like: 5,
         slug: "veliks-wangai-pemprov",
-        category: "tanah-papua",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },
         prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
-
-    },
+     },
     {
         title: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
         subtitle: "Polda Papua Disoroti? Keadilan untuk Tobias Silak",
@@ -40,8 +55,12 @@ interface Article {
         isLike: true,
         like: 5,
         slug: "polda-papua",
-        category: "regional",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
 
@@ -52,8 +71,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "warga-indonesia",
-        category: "bisnis",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
 
@@ -64,8 +87,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "podcast",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -75,8 +102,12 @@ interface Article {
         isLike: true,
         like: 50,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -86,8 +117,12 @@ interface Article {
         isLike: false,
         like: 0,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -97,8 +132,12 @@ interface Article {
         isLike: false,
         like: 0,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -108,8 +147,12 @@ interface Article {
         isLike: false,
         like: 0,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -119,8 +162,12 @@ interface Article {
         isLike: false,
         like: 30,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -130,8 +177,12 @@ interface Article {
         isLike: true,
         like: 5,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -141,8 +192,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -152,8 +207,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
 
@@ -164,8 +223,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -175,8 +238,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
     {
@@ -186,8 +253,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
 
@@ -198,8 +269,12 @@ interface Article {
         isLike: true,
         like: 200,
         slug: "natalius",
-        category: "tanah-papua",
-        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
+        category:{
+            categoryId:"papua-pegunungan",
+            name:"Papua Pegunungan",
+            parentId:'tanah-papua',
+            parentName:'Tanah Papua'
+        },        prependAvatar: "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1yEwXw.img?w=750&h=500&m=6&x=120&y=120&s=280&d=280",
 
     },
   ];

@@ -1,13 +1,13 @@
 <template>
     <v-container class="article-container">
         <v-row justify="center">
-            <v-col cols="12" md="10">
-                <v-card elevation="0">
+            <v-col cols="12" md="8">
+                <v-card>
                     <!-- Gambar Header -->
-                    <h1>section category 2</h1>
-                    <v-img v-if="filteredArticle?.image" :src="filteredArticle.image" max-height="500" cover></v-img>
+                    <h1>section Sub Category Index</h1>
+                    <v-img v-if="filteredArticle?.image" :src="filteredArticle.image" height="300" cover></v-img>
 
-                    <v-card-title class="article-title text-wrap">
+                    <v-card-title class="article-title">
                         {{ filteredArticle?.title || "Artikel Tidak Ditemukan" }}
                     </v-card-title>
 

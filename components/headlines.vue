@@ -3,13 +3,13 @@
     <v-row no-gutters>
         <v-col md="6" sm="12" lg="6" class="content-col">
             <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
-                <NuxtLink @click.prevent="openArticle(articles[0])" class="article-link">
+                <NuxtLink @click.prevent="$openArticle(articles[0])" class="article-link">
                     <NuxtImg preset="headlineMain" :src="articles[0]?.image || 'default-image.jpg'" class="w-100 h-100"
                         placeholder="blur" loading="eager" format="webp" fit="cover"
                         style="object-fit: cover; min-height: 100%;" />
                 </NuxtLink>
             </v-responsive>
-            <NuxtLink @click.prevent="openArticle(articles[0])" class="article-link">
+            <NuxtLink @click.prevent="$openArticle(articles[0])" class="article-link">
                 <v-card-title class="text-wrap text-h6">
                     {{ articles[0]?.title || 'Judul tidak tersedia' }}
                 </v-card-title>
@@ -32,14 +32,14 @@
                     <v-row no-gutters class="h-100">
                         <v-col cols="12" md="6" class="d-flex flex-column">
                             <v-card-title class="truncated-title text-h6">
-                                <NuxtLink @click.prevent="openArticle(article)" class="article-link">
+                                <NuxtLink @click.prevent="$openArticle(article)" class="article-link">
                                     {{ article.title }}
                                 </NuxtLink>
                             </v-card-title>
                         </v-col>
                         <v-col cols="12" md="6" class="d-flex flex-column">
                             <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9;">
-                                <NuxtLink @click.prevent="openArticle(article)" class="article-link">
+                                <NuxtLink @click.prevent="$openArticle(article)" class="article-link">
                                     <NuxtImg preset="headlineMain" :src="article?.image || 'default-image.jpg'"
                                         class="w-100 h-100" placeholder="blur" loading="eager" format="webp" fit="cover"
                                         style="object-fit: cover;" />
@@ -80,9 +80,9 @@ if (articlesPending) {
     loading.value = false;
 }
 
-const openArticle = (article) => {
-    router.push(`/article/${article.category}/${article.slug}`);
-};
+// const openArticle = (article) => {
+//     router.push(`${article.category.parentId}/${article.category.categoryId}/${article.slug}`);
+// };
 </script>
 
 <style scoped>

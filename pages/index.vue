@@ -103,14 +103,14 @@
 
                         <CustomCard title="Topik Populer">
                             <v-list>
-                                <v-list-item class="text-wrap mb-1" v-for="(article, index) in articles.slice(0, 5)"
+                                <v-list-item class="text-wrap mb-1" v-for="(item, index) in articles.slice(0, 5)"
                                     :key="index">
-                                    <NuxtLink to="/" class="article-link text-subtitle-2">
+                                    <NuxtLink @click.prevent="$openArticle(item)" class="article-link text-subtitle-2">
                                         <!-- <span class="text-h6">{{ index + 1 }}</span>  -->
                                         <v-chip>
                                             {{ index + 1 }}
                                         </v-chip>
-                                        {{ articles[index]?.title }}
+                                        {{ item.title }}
                                     </NuxtLink>
                                     <v-divider></v-divider>
                                 </v-list-item>
@@ -129,7 +129,7 @@
                                 <v-row no-gutters>
                                     <v-col cols="5" md="5">
                                         <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
-                                            <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                            <NuxtLink @click.prevent="$openArticle(item)">
                                                 <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
                                                     class="w-100 h-100" placeholder="blur" loading="eager" format="webp"
                                                     fit="cover" style="object-fit: cover;" />
@@ -138,8 +138,7 @@
                                     </v-col>
                                     <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
                                         <v-card-title class="text-subtitle-1 text-wrap">
-                                            <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
-                                                class="article-link">
+                                            <NuxtLink @click.prevent="$openArticle(item)" class="article-link">
                                                 {{ item.title }}
                                             </NuxtLink>
                                         </v-card-title>
@@ -162,7 +161,7 @@
                                         <v-row no-gutters>
                                             <v-col cols="12" md="5">
                                                 <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
-                                                    <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                                    <NuxtLink @click.prevent="$openArticle(item)">
                                                         <NuxtImg preset="article"
                                                             :src="item?.image || 'default-image.jpg'"
                                                             class="w-100 h-100" placeholder="blur" loading="eager"
@@ -172,8 +171,7 @@
                                             </v-col>
                                             <v-col cols="12" md="7" class="d-flex flex-column justify-space-between">
                                                 <v-card-title class="text-subtitle-1 text-wrap">
-                                                    <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
-                                                        class="article-link">
+                                                    <NuxtLink @click.prevent="$openArticle(item)" class="article-link">
                                                         {{ item.title }}
                                                     </NuxtLink>
                                                 </v-card-title>
@@ -204,7 +202,7 @@
                                         <v-card>
 
                                             <v-responsive class="flex-grow-1" style="aspect-ratio: 21/9">
-                                                <NuxtLink @click.prevent="openArticle(item.category, item.slug)">
+                                                <NuxtLink @click.prevent="$openArticle(item)">
                                                     <NuxtImg preset="article" :src="item?.image || 'default-image.jpg'"
                                                         class="w-100 h-100" placeholder="blur" loading="lazy"
                                                         format="webp" fit="cover" style="object-fit: cover;" />
@@ -212,8 +210,7 @@
                                             </v-responsive>
 
                                             <v-card-title class="text-h7 text-wrap">
-                                                <NuxtLink @click.prevent="openArticle(item.category, item.slug)"
-                                                    class="article-link">
+                                                <NuxtLink @click.prevent="$openArticle(item)" class="article-link">
                                                     {{ item.title }}
                                                 </NuxtLink>
                                             </v-card-title>
@@ -261,9 +258,9 @@ const tab = ref("headline");
 
 const router = useRouter();
 
-const openArticle = (category, slug) => {
-    router.push(`/article/${category}/${slug}`);
-};
+// const openArticle = (category, slug) => {
+//     router.push(`/article/${category}/${slug}`);
+// };
 
 const loading = ref(true);
 const { data: articles, pending: articlesPending } = await useFetch('/api/mockArticle');
